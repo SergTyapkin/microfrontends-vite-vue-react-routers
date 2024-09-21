@@ -10,7 +10,7 @@
   </div>
 
 <!--  <Sidebar></Sidebar>-->
-  <div ref="reactHeader"></div>
+  <ReactHeader></ReactHeader>
 
   <Modals ref="modal"></Modals>
   <Popups ref="popups"></Popups>
@@ -19,14 +19,14 @@
 
 <script>
 // import Sidebar from "./components/sidebar.js";
-import mountHeader from './components/header'
+import ReactHeader from './components/header.vue'
 
 import {getCurrentInstance} from "vue";
 import {Modals, Popups} from "@sergtyapkin/modals-popups";
 
 
 export default {
-  components: {Modals, Popups},
+  components: {Modals, Popups, ReactHeader},
 
   data() {
     return {
@@ -42,10 +42,10 @@ export default {
     global.$popups = this.$refs.popups;
     global.$app = this; // это обычно не используется, но может пригодиться
 
-    console.log("IMPORT:", mountHeader);
-
-    const { onParentNavigate } = mountHeader(this.$refs.reactHeader);
-    this.onNavigate = onParentNavigate;
+    // console.log("IMPORT:", mountHeader);
+    //
+    // const { onParentNavigate } = mountHeader(this.$refs.reactHeader);
+    // this.onNavigate = onParentNavigate;
   },
 
   watch: {

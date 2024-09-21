@@ -19,7 +19,7 @@ Make sure you have the following installed on your machine:
 - npm (>= 7) or yarn (>= 1.22)
 
 ## Project Structure
-
+```
 microfrontend-react-vite/
 ├── main/ # Host application
 │ ├── src/
@@ -40,7 +40,7 @@ microfrontend-react-vite/
 │ ├── package.json
 │ └── ...
 └── README.md
-
+```
 
 
 ## Installation
@@ -121,7 +121,7 @@ Follow these steps to install the dependencies for each application.
     npm run dev
     ```
 
-3. Open your browser and go to `http://localhost:3000` (or the port specified in the Vite config) to see the application in action.
+3. Open your browser and go to `http://localhost:5000` (or the port specified in the Vite config) to see the application in action.
 
 ## Technologies Used
 

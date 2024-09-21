@@ -3,6 +3,8 @@ import Vue from '@vitejs/plugin-vue';
 import basicSsl from '@vitejs/plugin-basic-ssl';
 import path from 'path';
 import federation from '@originjs/vite-plugin-federation';
+// import { dependencies } from 'package.json';
+const {dependencies} = require('./package.json');
 
 
 export default defineConfig(({command, mode}) => ({
@@ -19,6 +21,7 @@ export default defineConfig(({command, mode}) => ({
       },
       remotes: {},
       // shared: ['vue', 'vue-loader', 'vue-template-compiler', 'vue-router', 'vuex'],
+      shared: dependencies,
     }),
   ],
   server: {
