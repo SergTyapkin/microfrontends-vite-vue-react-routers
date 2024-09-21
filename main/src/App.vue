@@ -9,7 +9,7 @@
     </div>
   </div>
 
-<!--  <Sidebar></Sidebar>-->
+  <Sidebar></Sidebar>
   <ReactHeader></ReactHeader>
 
   <Modals ref="modal"></Modals>
@@ -18,15 +18,15 @@
 
 
 <script>
-// import Sidebar from "./components/sidebar.js";
-import ReactHeader from './components/header.vue'
+import Sidebar from "./components/Sidebar.vue";
+import ReactHeader from './components/Header.vue'
 
 import {getCurrentInstance} from "vue";
 import {Modals, Popups} from "@sergtyapkin/modals-popups";
 
 
 export default {
-  components: {Modals, Popups, ReactHeader},
+  components: {Modals, Popups, ReactHeader, Sidebar},
 
   data() {
     return {

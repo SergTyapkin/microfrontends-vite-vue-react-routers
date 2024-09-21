@@ -3,8 +3,11 @@
 </template>
 
 <script>
-import ReactHeader from "header/App";
 import ReactComponentTemplate from "./ReactComponentTemplate.vue";
+
+// import {lazy} from "react";
+// const ReactHeader = await lazy(() => import("header/App"));
+const ReactHeader = (await import("header/App")).default;
 
 export default {
   components: {ReactComponentTemplate},
@@ -13,6 +16,6 @@ export default {
     return {
       ReactHeader,
     }
-  }
+  },
 }
 </script>

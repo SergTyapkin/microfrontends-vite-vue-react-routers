@@ -8,15 +8,15 @@
   <div class="root-app">
     <div>SIDEBAR</div>
 
-    <div class="all-page-wrapper">
-      <div class="content-wrapper">
-        <router-view v-slot="{ Component }">
-          <transition name="scale-in" duration="200">
-            <component :is="Component"/>
-          </transition>
-        </router-view>
-      </div>
-    </div>
+<!--    <div class="all-page-wrapper">-->
+<!--      <div class="content-wrapper">-->
+<!--        <router-view v-slot="{ Component }">-->
+<!--          <transition name="scale-in" duration="200">-->
+<!--            <component :is="Component"/>-->
+<!--          </transition>-->
+<!--        </router-view>-->
+<!--      </div>-->
+<!--    </div>-->
 
     <Modals ref="modal"></Modals>
     <Popups ref="popups"></Popups>
