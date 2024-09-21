@@ -1,0 +1,96 @@
+@require 'constants.styl'
+@require 'fonts.styl'
+@require 'utils.styl'
+
+
+border-color = colorEmp1Inactive
+border-color-hover = colorEmp1
+border-color-disabled = colorEmp1Disabled
+text-color = colorBg
+text-color-hover-1 = colorEmp2
+text-color-hover-2 = colorText1
+text-color-disabled = colorText5
+bg-color = colorEmp1Disabled
+bg-color-hover = saturation(bg-color, 120%)
+bg-color-disabled = saturation(bg-color, 20%)
+
+border-color-2 = colorEmp2Inactive
+border-color-hover-2 = colorEmp2
+border-color-disabled-2 = colorEmp2Disabled
+bg-color-2 = colorEmp2Disabled
+bg-color-hover-2 = saturation(bg-color-2, 120%)
+bg-color-disabled-2 = saturation(bg-color-2, 20%)
+
+shadow-color = mix(black, transparent, 70%)
+
+
+button()
+    color text-color
+    font-medium()
+    padding 10px
+    border border-color-2 solid 0px
+    border-radius 999999999px
+    text-shadow none
+    transition all 0.2s ease
+    cursor pointer
+    box-sizing border-box
+    background colorButton
+    //box-shadow 5px 5px 10px shadow-color
+    margin auto
+    centered-flex-container()
+    width 70%
+
+    &:hover
+        color text-color-hover-1
+        border-color border-color-hover
+        //box-shadow 5px 5px 15px shadow-color
+
+    &[disabled]:not([disabled=false])
+        pointer-events none
+        color text-color-disabled
+        background bg-color-disabled
+        box-shadow none
+
+button-submit()
+    button()
+    padding 10px 20px
+    min-height 40px
+    background colorButtonSubmit
+    &:hover
+        color text-color-hover-2
+        border-color border-color-hover-2
+    &[disabled]:not([disabled=false])
+        background colorBgLight
+        border-color bg-color-disabled
+
+button-no-fill()
+    button()
+    padding 10px 20px
+    min-height 40px
+    background transparent
+    border colorButton solid 2px
+    color colorText1
+    &:hover
+        background colorButton
+        color colorTextDark1
+        border-color colorButton
+    &[disabled]:not([disabled=false])
+        color colorText3
+        background mix(colorButton, transparent, 40%)
+
+button-danger()
+    button()
+    background mix(colorError, transparent)
+    border-color colorError
+    &:hover
+        border-color mix(colorError, white)
+        color colorText1
+button-success()
+    button()
+    background mix(colorSuccess, transparent)
+    border-color colorSuccess
+    color colorText3
+    &:hover
+        border-color mix(colorSuccess, white)
+        color colorText1
+

@@ -1,0 +1,50 @@
+@require 'constants.styl'
+
+scroll-bg-color = colorBgLightMax
+scroll-thumb-color = #bad5ed
+scroll-thumb-color-hover = saturate(scroll-thumb-color, 150%)
+scrollbar-width-worded = bold
+scrollbar-width = 10px
+scrollbar-border = 2px
+//scroll-track-radius = (scrollbar-width / 2)
+scroll-track-radius = 0
+
+scrollable()
+  overflow-y auto
+
+  scrollbar-width scrollbar-width-worded
+  scrollbar-height scrollbar-width-worded
+  scrollbar-color scroll-thumb-color scroll-bg-color
+  &:hover
+    scrollbar-color scroll-thumb-color-hover scroll-bg-color
+  &:hover::-webkit-scrollbar-thumb
+    background-color scroll-thumb-color-hover
+  &::-webkit-scrollbar
+    width scrollbar-width
+    height scrollbar-width
+  &::-webkit-scrollbar-track
+    background scroll-bg-color
+    border-radius scroll-track-radius
+  &::-webkit-scrollbar-thumb
+    background-color scroll-thumb-color
+    border-radius (scrollbar-width / 2)
+    border scrollbar-border solid scroll-bg-color
+
+  &::-webkit-scrollbar-corner
+    background scroll-bg-color
+
+hidden-scrollbar()
+  overflow-y auto
+  &::-webkit-scrollbar
+    display none
+  -ms-overflow-style none
+  scrollbar-width none
+
+no-scrollbar()
+  &::-webkit-scrollbar
+  &::-webkit-scrollbar-thumb
+  &::-webkit-scrollbar-track
+  &::-webkit-scrollbar-corner
+    all unset
+    width 0
+    height 0
