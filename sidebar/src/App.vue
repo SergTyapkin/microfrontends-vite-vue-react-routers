@@ -6,7 +6,8 @@
 
 <template>
   <div class="root-app">
-    <div>SIDEBAR</div>
+    <h1>SIDEBAR</h1>
+    <i>(Component 2 Vue)</i>
 
 <!--    <div class="all-page-wrapper">-->
 <!--      <div class="content-wrapper">-->

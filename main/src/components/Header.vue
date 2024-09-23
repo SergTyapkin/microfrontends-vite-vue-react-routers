@@ -1,5 +1,5 @@
 <template>
-  <ReactComponentTemplate :react-component="ReactHeader"/>
+  <ReactComponentTemplate :react-import-promise="ReactHeaderPromise"/>
 </template>
 
 <script>
@@ -7,15 +7,15 @@ import ReactComponentTemplate from "./ReactComponentTemplate.vue";
 
 // import {lazy} from "react";
 // const ReactHeader = await lazy(() => import("header/App"));
-const ReactHeader = (await import("header/App")).default;
+const ReactHeaderPromise = import("header/App");
 
 export default {
   components: {ReactComponentTemplate},
 
   data() {
     return {
-      ReactHeader,
+      ReactHeaderPromise,
     }
-  },
+  }
 }
 </script>

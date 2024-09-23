@@ -7,7 +7,7 @@ import ReactDOM from "react-dom/client";
 
 export default {
   props: {
-    reactComponent: Function,
+    reactImportPromise: Promise,
   },
 
   data() {
@@ -16,11 +16,14 @@ export default {
     }
   },
 
-  mounted() {
+  async mounted() {
+    const reactComponent = (await this.reactImportPromise).default;
+
     this.rootReactElement = ReactDOM.createRoot(this.$el);
-    const createdReactComponent = this.reactComponent();
+    const createdReactComponent = reactComponent();
     this.rootReactElement.render(createdReactComponent);
   },
+
   beforeUnmount() {
     this.rootReactElement.unmount();
   }
