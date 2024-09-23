@@ -8,6 +8,10 @@ import ReactDOM from "react-dom/client";
 export default {
   props: {
     reactImportPromise: Promise,
+    elementProps: {
+      type: Object,
+      default: {},
+    },
   },
 
   data() {
@@ -20,7 +24,7 @@ export default {
     const reactComponent = (await this.reactImportPromise).default;
 
     this.rootReactElement = ReactDOM.createRoot(this.$el);
-    const createdReactComponent = reactComponent();
+    const createdReactComponent = reactComponent(this.elementProps);
     this.rootReactElement.render(createdReactComponent);
   },
 
