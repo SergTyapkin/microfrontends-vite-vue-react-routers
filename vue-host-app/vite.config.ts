@@ -17,7 +17,7 @@ export default defineConfig({
         reactChildApp: 'http://localhost:5001/assets/remoteEntryPoint.js',
         vueChildApp: 'http://localhost:5002/assets/remoteEntryPoint.js',
       },
-      shared: ['vue', 'vue-template-compiler', 'vue-router', 'vuex', 'react', 'react-dom'],
+      shared: ['vue', 'vue-router', 'vuex', 'react', 'react-dom'],
     }),
   ],
   resolve: {

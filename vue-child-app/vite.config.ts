@@ -17,13 +17,14 @@ export default defineConfig(({command, mode}) => ({
       name: 'vueChildApp',
       filename: 'remoteEntryPoint.js',
       exposes: {
-        './App': './src/App',
+        './App': './src/mountApp',
       },
       remotes: {},
-      shared: ['vue', 'vue-template-compiler', 'vue-router', 'vuex'],
+      shared: ['vue', 'vue-router', 'vuex'],
       // shared: dependencies,
     }),
   ],
+
   server: {
     // https: true,
     port: 5002,
@@ -37,6 +38,7 @@ export default defineConfig(({command, mode}) => ({
       },
     } : {})
   },
+
   resolve: {
     alias: [
       {

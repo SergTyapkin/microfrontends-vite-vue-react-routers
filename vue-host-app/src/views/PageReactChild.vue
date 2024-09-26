@@ -2,7 +2,7 @@
 </style>
 
 <template>
-  <h3><u><router-link :to="{name: 'default'}">&lt; На главную</router-link></u></h3>
+  <h3><u><router-link :to="{name: 'default'}">&lt; Back</router-link></u></h3>
 
   <ReactChild></ReactChild>
 </template>

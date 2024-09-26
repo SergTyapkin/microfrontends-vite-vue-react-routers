@@ -25,9 +25,9 @@
 <template>
   <div class="root-404">
     <div class="form">
-      <div class="title">404 Страница не найдена</div>
-      <div class="info">Запрошенной страницы не существует</div>
-      <router-link :to="{name: 'default'}" class="link">На главную</router-link>
+      <div class="title">404 url not found</div>
+      <div class="info">This page doesn't exists</div>
+      <router-link :to="{name: 'default'}" class="link">To main page</router-link>
     </div>
   </div>
 </template>

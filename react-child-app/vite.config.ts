@@ -16,6 +16,7 @@ export default defineConfig(({command, mode}: {command: string, mode: 'developme
       shared: ['react', 'react-dom', 'react-router-dom'],
     }),
   ],
+
   server: {
     // https: true,
     port: 5001,
@@ -29,6 +30,7 @@ export default defineConfig(({command, mode}: {command: string, mode: 'developme
       },
     } : {})
   },
+
   build: {
     modulePreload: false,
     target: 'esnext',

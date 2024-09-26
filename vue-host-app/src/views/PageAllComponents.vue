@@ -6,7 +6,7 @@
 
 <template>
   <div class="root-main">
-    <router-link :to="{name: 'default'}">&lt; На главную</router-link>
+    <router-link :to="{name: 'default'}">&lt; Back</router-link>
     <div class="title">All child components:</div>
 
     <ReactChild></ReactChild>

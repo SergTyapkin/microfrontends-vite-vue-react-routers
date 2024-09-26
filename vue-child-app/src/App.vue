@@ -2,13 +2,14 @@
 .root-app
   background #000064
   color white
+  width 100%
+  text-align center
 </style>
 
 <template>
   <div class="root-app">
-    <h1>SIDEBAR</h1>
-    <i>(Component 2 Vue)</i>
-    <router-link :to="{name: 'main'}"><h3><u>To Main Component</u></h3></router-link>
+    <h1>Vue component</h1>
+    <router-link :to="{name: 'main'}"><h3><u>To Main page</u></h3></router-link>
 
     <router-view></router-view>
 

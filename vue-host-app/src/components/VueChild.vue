@@ -1,12 +1,14 @@
 <template>
-  <VueChild></VueChild>
+  <VueComponentTemplate
+    :vue-import-promise="import('vueChildApp/App')"
+    :element-props="{}"
+  ></VueComponentTemplate>
 </template>
 
 <script>
-import {defineAsyncComponent} from "vue";
-const VueChild = defineAsyncComponent(() => import("vueChildApp/App"));
+import VueComponentTemplate from "~/components/VueComponentTemplate.vue";
 
 export default {
-  components: {VueChild}
+  components: {VueComponentTemplate},
 };
 </script>
