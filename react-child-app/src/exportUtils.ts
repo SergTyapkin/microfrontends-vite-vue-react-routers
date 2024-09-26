@@ -14,7 +14,6 @@ export default function getExportMountFunction(reactComponent: any) {
         initialEntries: [initialPath],
         basename: initialPath
       });
-    console.log("HISTORY:", history)
 
     if (onNavigate) {
       history.listen(onNavigate);
@@ -25,10 +24,10 @@ export default function getExportMountFunction(reactComponent: any) {
     // ReactDOM.render(<App onSignIn={onSignIn} history={history} />, el);
 
     return {
-      onParentNavigate: (nextPathname: string) => {
-        const {pathname} = history.location;
-        if (pathname !== nextPathname) {
-          history.push(nextPathname);
+      onParentNavigate: (nextPath: string) => {
+        const {pathname: path} = history.location;
+        if (path !== nextPath) {
+          history.push(nextPath);
         }
       },
       unmount: () => {

@@ -14,34 +14,34 @@ export default {
 
   data() {
     return {
-      onNavigate: () => {},
+      navigateVueElement: () => {},
       unmount: () => {},
 
-      iswatch: true,
+      initialPath: this.$route.matched[0].path,
+
+      skip1watch: false,
     }
   },
 
   async mounted() {
     const importedModule = await this.vueImportPromise;
     const vueComponentMount = importedModule.default;
-    vueComponentMount(this.$el);
 
-
-    // this.initialPath = this.$route.matched[0].path;
-    // const {onParentNavigate, unmount} = reactComponentMount(this.$el, {
-    //   initialPath: this.initialPath,
-    //   onNavigate: ({ pathname: nextPathname }) => {
-    //     let nextFullPath = this.initialPath + nextPathname;
-    //     console.log("route from auth to container", nextFullPath, this.$route.path);
-    //     if (this.$route.path !== nextFullPath) {
-    //       this.iswatch = false;
-    //       this.$router.push(nextFullPath);
-    //     }
-    //   },
-    //   // onSomethingCustomEvent: () => {},
-    // });
-    // this.onNavigate = onParentNavigate;
-    // this.unmount = unmount;
+    const {onParentNavigate, unmount} = vueComponentMount(this.$el, {
+      initialPath: this.initialPath,
+      onNavigate: (nextPathname) => {
+        let nextFullPath = this.initialPath + nextPathname;
+        if (this.$route.path.replace(/\/$/, "") !== nextFullPath.replace(/\/$/, "")) { // Compare with replacing trailing slashes
+          this.skip1watch = true;
+          this.$router.push(nextFullPath);
+        }
+      },
+    });
+    this.navigateVueElement = onParentNavigate;
+    this.unmount = unmount;
+  },
+  unmounted() {
+    this.unmount();
   },
 
   methods: {
@@ -51,22 +51,16 @@ export default {
   },
 
   watch: {
-    // $route(to, from) {
-    //   let innerRoute = this.getInnerRoute(to.path);
-    //   console.log(
-    //     "watch",
-    //     this.getInnerRoute(to.path),
-    //     this.getInnerRoute(from.path),
-    //     this.iswatch
-    //   );
-    //   if (this.iswatch) {
-    //     if (innerRoute) {
-    //       // this.onParentNavigate(innerRoute);
-    //     } else {
-    //       return true;
-    //     }
-    //   } else this.iswatch = true;
-    // },
+    $route(to, from) {
+      if (this.skip1watch) {
+        this.skip1watch = false;
+        return;
+      }
+      const innerRoute = this.getInnerRoute(to.path);
+      if (innerRoute) {
+        this.navigateVueElement(innerRoute);
+      }
+    },
   },
 }
 </script>

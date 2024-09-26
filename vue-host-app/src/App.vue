@@ -1,21 +1,24 @@
 <style lang="stylus" scoped>
 header
-  padding 20px 0
+  padding 20px 40px
   width 100%
   background black
+  text-align center
+
+.all-page-wrapper
+  padding 40px
 </style>
 
 <template>
   <header><h1>Host app header</h1></header>
 
   <div class="all-page-wrapper">
-    <div class="content-wrapper">
-      <router-view v-slot="{ Component }">
-        <transition name="scale-in" duration="200">
-          <component :is="Component"/>
-        </transition>
-      </router-view>
-    </div>
+<!--      <router-view v-slot="{ Component }">-->
+<!--        <transition name="scale-in" duration="200">-->
+<!--          <component :is="Component"/>-->
+<!--        </transition>-->
+<!--      </router-view>-->
+    <router-view></router-view>
   </div>
 
   <Modals ref="modal"></Modals>
@@ -39,7 +42,8 @@ export default {
 
   mounted() {
     const global = getCurrentInstance().appContext.config.globalProperties;
-    // Прописываем в глобавльные свойства частоиспользуемые компоненты, чтобы они были доступны из любых других компонентов
+
+    // Прописываем в глобальные свойства частоиспользуемые переменные, чтобы они были доступны из любых других компонентов
     global.$user = this.$store.state.user;
     global.$modals = this.$refs.modal;
     global.$popups = this.$refs.popups;

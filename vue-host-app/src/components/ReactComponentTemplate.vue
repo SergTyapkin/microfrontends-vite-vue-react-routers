@@ -3,8 +3,6 @@
 </template>
 
 <script>
-import ReactDOM from "react-dom/client";
-
 export default {
   props: {
     reactImportPromise: Promise,
@@ -16,10 +14,14 @@ export default {
 
   data() {
     return {
-      onNavigate: () => {},
+      navigateReactElement: () => {},
       unmount: () => {},
 
-      iswatch: true,
+      initialPath: this.$route.matched[0].path,
+
+      skip1watch: false,
+
+      isComponentLoaded: false,
     }
   },
 
@@ -27,28 +29,20 @@ export default {
     const importedModule = await this.reactImportPromise;
     const reactComponentMount = importedModule.mount;
 
-    // const reactComponent = importedModule.default;
-    // this.rootReactElement = ReactDOM.createRoot(this.$el);
-    // const createdReactComponent = reactComponent(this.elementProps);
-    // console.log(createdReactComponent, reactComponent);
-    // this.rootReactElement.render(createdReactComponent);
-
-
-    this.initialPath = this.$route.matched[0].path;
     const {onParentNavigate, unmount} = reactComponentMount(this.$el, {
       initialPath: this.initialPath,
       onNavigate: ({ pathname: nextPathname }) => {
         let nextFullPath = this.initialPath + nextPathname;
-        console.log("route from auth to container", nextFullPath, this.$route.path);
         if (this.$route.path !== nextFullPath) {
-          this.iswatch = false;
+          this.skip1watch = true;
           this.$router.push(nextFullPath);
         }
       },
-      // onSomethingCustomEvent: () => {},
     });
-    this.onNavigate = onParentNavigate;
+    this.navigateReactElement = onParentNavigate;
     this.unmount = unmount;
+
+    this.isComponentLoaded = true;
   },
 
   methods: {
@@ -59,20 +53,14 @@ export default {
 
   watch: {
     $route(to, from) {
-      let innerRoute = this.getInnerRoute(to.path);
-      console.log(
-        "watch",
-        this.getInnerRoute(to.path),
-        this.getInnerRoute(from.path),
-        this.iswatch
-      );
-      if (this.iswatch) {
-        if (innerRoute) {
-          // this.onParentNavigate(innerRoute);
-        } else {
-          return true;
-        }
-      } else this.iswatch = true;
+      if (this.skip1watch) {
+        this.skip1watch = false;
+        return;
+      }
+      const innerRoute = this.getInnerRoute(to.path);
+      if (innerRoute) {
+        this.navigateReactElement(innerRoute);
+      }
     },
   },
 

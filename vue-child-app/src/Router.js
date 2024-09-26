@@ -13,7 +13,7 @@ import Right from "~/components/Right.vue";
 // import Admin from "./views/Admin.vue";
 
 
-export default function createVueRouter(Store) {
+export default function createVueRouter(Store, initialPath, beforeEach) {
   const routes = [
     {path: '/', name: 'default'},
 
@@ -37,13 +37,14 @@ export default function createVueRouter(Store) {
   ];
 
   const Router = createRouter({
-    history: createWebHistory(),
+    history: createWebHistory(initialPath),
     routes: routes,
   });
 
 
   // let router_got_user = false;
   Router.beforeEach(async (to, from, next) => {
+    beforeEach(to.path);
     // if (!router_got_user) {
     //   await Store.dispatch('GET_USER');
     //   router_got_user = true;

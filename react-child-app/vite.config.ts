@@ -1,6 +1,7 @@
 import {defineConfig} from 'vite';
 import react from '@vitejs/plugin-react';
 import federation from '@originjs/vite-plugin-federation';
+import path from 'path';
 
 
 export default defineConfig(({command, mode}: {command: string, mode: 'development' | 'production'}) => ({
@@ -29,6 +30,19 @@ export default defineConfig(({command, mode}: {command: string, mode: 'developme
         // rewrite: (path) => path.replace(/^\/assets/, '/dist/assets'),
       },
     } : {})
+  },
+
+  resolve: {
+    alias: [
+      {
+        find: '~', // to use ~ as project root like: "import Some from '~/components/Some.vue'"
+        replacement: path.resolve(__dirname, 'src')
+      },
+      {
+        find: '@~', // to use @~ as node_modules root like: "import Some from '@~/Some'"
+        replacement: path.resolve(__dirname, 'node_modules')
+      }
+    ]
   },
 
   build: {

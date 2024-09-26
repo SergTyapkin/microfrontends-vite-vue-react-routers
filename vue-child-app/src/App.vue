@@ -4,11 +4,34 @@
   color white
   width 100%
   text-align center
+  .logo
+    size = 100px
+    moving-down-size = size / 3
+
+    width size
+    height size
+    will-change filter
+    transition filter 300ms
+    display block
+    margin 0 auto
+    margin-bottom moving-down-size
+    &:hover
+      filter 'drop-shadow(0 0 %s #5dffacaa)' % (size / 10)
+
+    @keyframes logo-move
+      from
+        transform translateY(moving-down-size) scale(0.8)
+      to
+        transform translateY(0) scale(1)
+
+    @media (prefers-reduced-motion: no-preference)
+      animation logo-move infinite 2s ease alternate
 </style>
 
 <template>
   <div class="root-app">
     <h1>Vue component</h1>
+    <img class="logo" src="/res/vue.svg" alt="vue logo">
     <router-link :to="{name: 'main'}"><h3><u>To Main page</u></h3></router-link>
 
     <router-view></router-view>
@@ -47,7 +70,7 @@ export default {
 
   watch: {
     $route(to, from) {
-      console.log(from.path, '->', to.path);
+      console.log("Vue child router:", from.path, '->', to.path);
     }
   },
 };

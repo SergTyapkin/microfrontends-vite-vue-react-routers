@@ -1,7 +1,7 @@
 import mount from "./mountApp.js";
+import '~/styles/global.styl';
 
 const targetElement = document.getElementById('app');
-console.log(targetElement)
 if (targetElement) {
   mount(targetElement);
 }

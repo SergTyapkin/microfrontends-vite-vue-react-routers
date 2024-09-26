@@ -1,7 +1,4 @@
 <style lang="stylus" scoped>
-@require '../styles/constants.styl'
-@require '../styles/fonts.styl'
-
 .root-404
   width 100%
   padding 20px
