@@ -3,11 +3,9 @@ import Vue from '@vitejs/plugin-vue';
 import basicSsl from '@vitejs/plugin-basic-ssl';
 import path from 'path';
 import federation from '@originjs/vite-plugin-federation';
-// import { dependencies } from 'package.json';
-// const {dependencies} = require('./package.json');
 
 
-export default defineConfig(({command, mode}) => ({
+export default defineConfig(({command, mode}: {command: string, mode: string}) => ({
   plugins: [
     Vue({
       include: [/\.vue$/],
@@ -30,7 +28,7 @@ export default defineConfig(({command, mode}) => ({
     port: 5002,
 
     proxy: (mode === 'development' ? {
-      '/assets': {
+      '^/assets': {
         target: `http://localhost:5002/dist`,
         secure: false,
         changeOrigin: false,
@@ -53,6 +51,18 @@ export default defineConfig(({command, mode}) => ({
   },
 
   build: {
+    rollupOptions: {
+      output: {
+        assetFileNames: (assetInfo) => {
+          let dir = 'assets';
+          let extType = assetInfo.name.split('.')[1];
+          if (/png|jpe?g|svg|gif|tiff|bmp|ico/i.test(extType)) {
+            dir = 'assets-vueChildApp';
+          }
+          return `${dir}/[name]-[hash][extname]`;
+        }
+      }
+    },
     modulePreload: false,
     target: 'esnext',
     minify: false,

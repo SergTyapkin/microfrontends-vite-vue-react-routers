@@ -5,7 +5,7 @@ import path from 'path';
 import federation from '@originjs/vite-plugin-federation';
 
 
-export default defineConfig({
+export default defineConfig(({command, mode}: {command: string, mode: 'development' | 'production'}) => ({
   plugins: [
     Vue({
       include: [/\.vue$/],
@@ -20,6 +20,24 @@ export default defineConfig({
       shared: ['vue', 'vue-router', 'vuex'],
     }),
   ],
+
+  server: {
+    proxy: {
+      '/assets-reactChildApp': {
+        target: `http://localhost:5001`,
+        secure: false,
+        changeOrigin: false,
+        // rewrite: (path) => path.replace(/^\/assets/, '/dist/assets'),
+      },
+      '/assets-vueChildApp': {
+        target: `http://localhost:5002`,
+        secure: false,
+        changeOrigin: false,
+        // rewrite: (path) => path.replace(/^\/assets/, '/dist/assets'),
+      },
+    }
+  },
+
   resolve: {
     alias: [
       {
@@ -32,10 +50,11 @@ export default defineConfig({
       }
     ]
   },
+
   build: {
     modulePreload: false,
     target: 'esnext',
     minify: false,
     cssCodeSplit: false,
   },
-});
+}));

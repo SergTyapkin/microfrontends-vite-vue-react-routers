@@ -23,7 +23,7 @@ export default defineConfig(({command, mode}: {command: string, mode: 'developme
     port: 5001,
 
     proxy: (mode === 'development' ? {
-      '/assets': {
+      '^/assets': {
         target: `http://localhost:5001/dist`,
         secure: false,
         changeOrigin: false,
@@ -46,6 +46,18 @@ export default defineConfig(({command, mode}: {command: string, mode: 'developme
   },
 
   build: {
+    rollupOptions: {
+      output: {
+        assetFileNames: (assetInfo) => {
+          let dir = 'assets';
+          let extType = assetInfo.name.split('.')[1];
+          if (/png|jpe?g|svg|gif|tiff|bmp|ico/i.test(extType)) {
+            dir = 'assets-reactChildApp';
+          }
+          return `${dir}/[name]-[hash][extname]`;
+        }
+      }
+    },
     modulePreload: false,
     target: 'esnext',
     minify: false,
