@@ -38,7 +38,7 @@ export default {
           this.$router.push(nextFullPath);
         }
       },
-    });
+    }, this.elementProps);
     this.navigateReactElement = onParentNavigate;
     this.unmount = unmount;
 
