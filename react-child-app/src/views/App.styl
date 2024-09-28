@@ -1,30 +1,26 @@
-.root
-  vue-color = #00d7fd
-  border vue-color 1px solid
-  border-radius 10px
-  padding 20px
-  background mix(vue-color, transparent, 10%)
-  width 100%
-  text-align center
+@require "../styles/constantsReact.styl"
+@require "../../../shared-res/styles/components.styl"
+@require "../../../shared-res/styles/animations.styl"
+
+.root-react-app
+  block(colorReact)
 
 .logo
-  --size 200px
-  height var(--size)
-  width var(--size)
+  size = 200px
+  height size
+  width size
   will-change filter
   transition filter 300ms
   display block
   margin 0 auto
   &:hover
-   filter drop-shadow(0 0 calc(var(--size) / 10) #646cffaa)
+   filter 'drop-shadow(0 0 %s %s)' % ((size / 20) colorReact)
 
-  @media (prefers-reduced-motion no-preference)
-    animation logo-spin infinite 10s ease alternate
-
-    @keyframes logo-spin
-      from
-        transform rotate(0deg) scale(0.8)
-      to
-        transform rotate(360deg) scale(1)
+  animation-not-reduced(logo-spin infinite 10s ease alternate)
+  @keyframes logo-spin
+    from
+      transform rotate(0deg) scale(0.8)
+    to
+      transform rotate(360deg) scale(1)
 
 

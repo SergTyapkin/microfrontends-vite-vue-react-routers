@@ -1,0 +1,20 @@
+@require 'constants.styl'
+@require 'fonts.styl'
+@require 'buttons.styl'
+@require 'utils.styl'
+
+block(block-color=colorBg)
+    display block
+    border block-color 1px solid
+    border-radius 10px
+    background mix(block-color, transparent, 10%)
+    color colorText1
+    width 100%
+    text-align center
+    padding 20px
+    .block-title
+        font-large()
+    .block-main
+        font-medium()
+    .block-info
+        font-small()

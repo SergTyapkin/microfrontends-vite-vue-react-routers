@@ -4,7 +4,7 @@ import getExportMountFunction from "../exportUtils.js";
 import ImgReactLogo from '/res/react.svg';
 
 const App = ({caption = "default text"}) => (
-  <div className="root">
+  <div className="root-react-app">
     <h1>React component <img src={ImgReactLogo} alt="react logo" className="logo"/></h1>
     <div>Prop "caption" value: {caption}</div>
   </div>

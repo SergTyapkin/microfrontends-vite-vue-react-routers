@@ -1,13 +1,10 @@
 <style lang="stylus" scoped>
+@require "./styles/constantsVue.styl"
+@require "../../shared-res/styles/components.styl"
+@require "../../shared-res/styles/animations.styl"
+
 .root-app
-  vue-color = #41b782
-  border vue-color 1px solid
-  border-radius 10px
-  background mix(vue-color, transparent, 10%)
-  color white
-  width 100%
-  text-align center
-  padding 20px
+  block(colorVue)
   .logo
     size = 100px
     moving-down-size = size / 3
@@ -20,16 +17,14 @@
     margin 0 auto
     margin-bottom moving-down-size
     &:hover
-      filter 'drop-shadow(0 0 %s #5dffacaa)' % (size / 10)
+      filter 'drop-shadow(0 0 %s %s)' % ((size / 10) colorVue)
 
+    animation-not-reduced(logo-move infinite 2s ease alternate)
     @keyframes logo-move
       from
         transform translateY(moving-down-size) scale(0.8)
       to
         transform translateY(0) scale(1)
-
-    @media (prefers-reduced-motion: no-preference)
-      animation logo-move infinite 2s ease alternate
 </style>
 
 <template>

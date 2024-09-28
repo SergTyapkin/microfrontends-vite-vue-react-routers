@@ -1,0 +1,53 @@
+@require 'constants.styl'
+@require 'fonts.styl'
+@require 'utils.styl'
+
+
+button(
+    color-bg, color-text, color-border,
+    color-bg-hover, color-text-hover, color-border-hover,
+    color-bg-disabled, color-text-disabled, color-border-disabled
+)
+    color color-text
+    font-medium()
+    font-bold()
+    padding 10px
+    border-radius borderRadiusM
+    cursor pointer
+    box-sizing border-box
+    background color-bg
+    border color-border solid 1px
+    trans()
+    centered-margin()
+    centered-flex-container()
+
+    &:hover
+        color color-text-hover
+        border-color color-border-hover
+        background color-bg-hover
+
+    &[disabled]:not([disabled=false])
+        pointer-events none
+        color color-text-disabled
+        border-color color-border-disabled
+        background color-bg-disabled
+
+button-link()
+    button(
+        transparent, colorEmp1, colorEmp1,
+        mix(transparent, white, 95%), colorText1, colorText1,
+        mix(transparent, white, 50%), mix(colorEmp1, colorBg), mix(colorEmp1, colorBg)
+    )
+button-danger()
+    button(
+            mix(colorError, colorBg, 80%), colorText3, colorError,
+            mix(colorError, colorBg, 1000%), colorText1, colorEmp1,
+            mix(colorError, colorBg, 20%), colorText5, colorBg
+    )
+button-danger()
+    button(
+            mix(colorSuccess, colorBg, 80%), colorText3, colorSuccess,
+            mix(colorSuccess, colorBg, 1000%), colorText1, colorEmp1,
+            mix(colorSuccess, colorBg, 20%), colorText5, colorBg
+    )
+

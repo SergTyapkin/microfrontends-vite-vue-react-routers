@@ -1,3 +1,10 @@
+@require "constants.styl"
+@require "scrollbars.styl"
+@require "fonts.styl"
+
+@require "fontsLoader.styl"
+
+
 html
     overflow-x hidden
     scrollable()
@@ -19,12 +26,11 @@ body
     min-height 100vh
     position relative
     overflow-x hidden
-    background #212121
+    background colorBg
     overflow-y hidden
-    color #ffffff
-    font-family Inter, system-ui, Avenir, Helvetica, Arial, sans-serif
-    line-height 1.5
-    font-weight 400
+    font-medium()
+    font-normal()
+    color colorText1
 
     color-scheme dark
     font-synthesis none

@@ -1,0 +1,31 @@
+_default-font-family()
+    font-family ALS-Sector, Roboto, Inter, system-ui, Avenir, Helvetica, Arial, sans-serif, monospace
+
+font-large-extra()
+    _default-font-family()
+    line-height 1.2
+    font-size clamp(1.5rem, calc(2vw + 1.5rem), 2rem)
+font-large()
+    _default-font-family()
+    line-height 1.2
+    font-size clamp(1rem, calc(1vw + 1rem), 1.5rem)
+font-medium()
+    _default-font-family()
+    line-height 1.2
+    font-size clamp(1rem, calc(.7vw + .7rem), 1.3rem)
+font-small()
+    _default-font-family()
+    line-height 1.2
+    font-size clamp(.8rem, calc(.5vw + .7rem), 1rem)
+font-small-extra()
+    _default-font-family()
+    line-height 1.2
+    font-size clamp(.6rem, calc(.3vw + .7rem), .8rem)
+
+
+font-bold()
+    font-weight 700
+font-normal()
+    font-weight 500
+font-thin()
+    font-weight 400
