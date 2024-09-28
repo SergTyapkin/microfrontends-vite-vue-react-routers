@@ -2,13 +2,17 @@
   "compilerOptions": {
     "target": "esnext",
     "useDefineForClassFields": true,
-    "lib": ["ESNext", "DOM", "DOM.Iterable"],
+    "lib": ["esnext", "DOM", "DOM.Iterable"],
     "module": "esnext",
+    "allowJs": true,
     "skipLibCheck": true,
+    "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
 
     /* Bundler mode */
+    "forceConsistentCasingInFileNames": true,
     "moduleResolution": "nodenext",
+    "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
 
@@ -17,12 +21,11 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true
+
+    "paths": {
+      "~/*": ["/src/*"],
+      "@~/*": ["/node_modules/*"],
+    }
   },
   "include": ["src"],
-  "references": [{ "path": "./tsconfig.node.json" }],
-  "exclude": [
-    "node_modules"
-  ]
 }

@@ -1,7 +1,7 @@
 <template>
   <ReactComponentTemplate
     :react-import-promise="import('reactChildApp/App')"
-    :element-props="{caption: 'My caption text'}"
+    :element-props="{caption: 'Custom text from host app'}"
   />
 </template>
 

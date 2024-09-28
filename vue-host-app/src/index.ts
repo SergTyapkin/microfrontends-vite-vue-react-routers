@@ -1,8 +1,9 @@
 import { createApp } from 'vue'
 
+// @ts-ignore
 import App from './App.vue';
-import Storage from './Store';
-import createVueRouter from './Router';
+import Storage from './Store.js';
+import createVueRouter from './Router.js';
 
 // глобальное подключение css файла с базовыми стилями
 // import './styles/fontsLoader.styl';

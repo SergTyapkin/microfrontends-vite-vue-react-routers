@@ -1,15 +1,15 @@
 import { createApp } from 'vue'
 
+// @ts-ignore
 import App from './App.vue'
-// import Storage from './Store.js'
 import createVueRouter from './Router.js'
 
 export default function mount(el: HTMLElement, {onNavigate, initialPath}: {
   onNavigate: (pathname: string) => void,
-  initialPath?: string
-} = {onNavigate: () => {}}) {
+  initialPath: string
+} = {onNavigate: () => {}, initialPath: ''}, props: any = {}) {
   const Router = createVueRouter(Storage, initialPath, onNavigate);
-  const app = createApp(App);
+  const app = createApp(App, props);
   app
     // .use(WS, `wss://${location.host}/ws`)  // Пока что без вебсокетов
     .use(Router)

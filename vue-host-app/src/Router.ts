@@ -1,20 +1,24 @@
-import {createRouter, createWebHistory} from 'vue-router'
+import {createRouter, createWebHistory, Router, RouteLocationNormalized, NavigationGuardNext} from 'vue-router'
+
+// @ts-ignore
+import {type Store} from 'vuex'
 
 // Components:
-// import Profile from "./views/Profile.vue";
-// import Registration from "./views/Registration.vue";
-import Page404 from "./views/Page404.vue";
+// @ts-ignore
+import Page404 from "~/views/Page404.vue";
+// @ts-ignore
 import PageNavigation from "~/views/PageNavigation.vue";
+// @ts-ignore
 import PageAllComponents from "~/views/PageAllComponents.vue";
+// @ts-ignore
 import PageVueChild from "~/views/PageVueChild.vue";
+// @ts-ignore
 import PageReactChild from "~/views/PageReactChild.vue";
-// import SignIn from "./views/SignIn.vue";
-// import ChangePassword from "./views/ChangePassword.vue";
-// import Task from "./views/Task.vue";
-// import Admin from "./views/Admin.vue";
 
 
-export default function createVueRouter(Store) {
+export default function createVueRouter(Store: Store): Router {
+  Store;
+
   const routes = [
     {path: '/', name: 'default', component: PageNavigation},
 
@@ -32,7 +36,9 @@ export default function createVueRouter(Store) {
 
 
   // let router_got_user = false;
-  Router.beforeEach(async (to, from, next) => {
+  Router.beforeEach(async (to: RouteLocationNormalized, from: RouteLocationNormalized, next: NavigationGuardNext) => {
+    to;
+    from;
     // if (!router_got_user) {
     //   await Store.dispatch('GET_USER');
     //   router_got_user = true;
@@ -81,7 +87,7 @@ export default function createVueRouter(Store) {
     next();
   });
 
-  Router.beforeResolve(async (to) => {
+  Router.beforeResolve(async () => {
     if (window?.onbeforeunload) {
       if (confirm("Изменения не сохранены. Вы уверены, что хотите покинуть страницу?")) {
         window.onbeforeunload = null;

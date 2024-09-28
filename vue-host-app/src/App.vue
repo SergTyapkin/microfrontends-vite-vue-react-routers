@@ -26,9 +26,11 @@ header
 </template>
 
 
-<script>
+<script lang="ts">
 import {getCurrentInstance} from "vue";
 import {Modals, Popups} from "@sergtyapkin/modals-popups";
+import {RouteLocationNormalized} from "vue-router";
+import API from "~/Api.js";
 
 
 export default {
@@ -36,27 +38,23 @@ export default {
 
   data() {
     return {
-      onNavigate: undefined,
     }
   },
 
   mounted() {
-    const global = getCurrentInstance().appContext.config.globalProperties;
+    const global = getCurrentInstance()?.appContext.config.globalProperties;
 
-    // Прописываем в глобальные свойства частоиспользуемые переменные, чтобы они были доступны из любых других компонентов
-    global.$user = this.$store.state.user;
-    global.$modals = this.$refs.modal;
-    global.$popups = this.$refs.popups;
-    global.$app = this; // это обычно не используется, но может пригодиться
-
-    // console.log("IMPORT:", mountHeader);
-    //
-    // const { onParentNavigate } = mountHeader(this.$refs.reactHeader);
-    // this.onNavigate = onParentNavigate;
+    if (global) {
+      // Прописываем в глобальные свойства частоиспользуемые переменные, чтобы они были доступны из любых других компонентов
+      global.$modals = this.$refs.modal;
+      global.$popups = this.$refs.popups;
+      global.$app = this; // это обычно не используется, но может пригодиться
+      global.$api = new API(); // это обычно не используется, но может пригодиться
+    }
   },
 
   watch: {
-    $route(to, from) {
+    $route(to: RouteLocationNormalized, from: RouteLocationNormalized) {
       console.log("Host router:", from.path, '->', to.path);
     }
   },

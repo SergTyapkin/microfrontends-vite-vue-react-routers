@@ -1,7 +1,7 @@
 <template>
   <VueComponentTemplate
     :vue-import-promise="import('vueChildApp/App')"
-    :element-props="{}"
+    :element-props="{caption: 'Custom text from host app'}"
   ></VueComponentTemplate>
 </template>
 

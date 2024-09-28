@@ -1,10 +1,10 @@
 import {defineConfig} from 'vite';
 import react from '@vitejs/plugin-react';
 import federation from '@originjs/vite-plugin-federation';
-import path from 'path';
+import * as path from 'path';
 
 
-export default defineConfig(({command, mode}: {command: string, mode: 'development' | 'production'}) => ({
+export default defineConfig(({command, mode}: {command, mode: 'development' | 'production'}) => ({
   plugins: [
     react(),
     federation({
@@ -48,7 +48,7 @@ export default defineConfig(({command, mode}: {command: string, mode: 'developme
   build: {
     rollupOptions: {
       output: {
-        assetFileNames: (assetInfo) => {
+        assetFileNames: (assetInfo: {name: string}) => {
           let dir = 'assets';
           let extType = assetInfo.name.split('.')[1];
           if (/png|jpe?g|svg|gif|tiff|bmp|ico/i.test(extType)) {

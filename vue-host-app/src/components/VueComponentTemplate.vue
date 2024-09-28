@@ -36,7 +36,7 @@ export default {
           this.$router.push(nextFullPath);
         }
       },
-    });
+    }, this.elementProps);
     this.navigateVueElement = onParentNavigate;
     this.unmount = unmount;
   },

@@ -11,11 +11,13 @@ export default function getExportMountFunction(reactComponent: any) {
     const history =
       defaultHistory ||
       createBrowserHistory({
+        // @ts-ignore
         initialEntries: [initialPath],
         basename: initialPath
       });
 
     if (onNavigate) {
+      // @ts-ignore
       history.listen(onNavigate);
     }
     const rootReactElement = ReactDOMCreateRoot(el);

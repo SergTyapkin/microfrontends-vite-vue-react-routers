@@ -11,9 +11,9 @@
   },
   "dependencies": {
     "@originjs/vite-plugin-federation": "^1.3.5",
-    "@sergtyapkin/modals-popups": "^1.0.1",
-    "@sergtyapkin/models-validator": "^1.0.1",
-    "@sergtyapkin/rest-api": "^1.0.2",
+    "@sergtyapkin/modals-popups": "^1.1.1",
+    "@sergtyapkin/models-validator": "^1.0.6",
+    "@sergtyapkin/rest-api": "^1.0.7",
     "@vitejs/plugin-vue": "^4.2.3",
     "file-loader": "^6.2.0",
     "stylus": "^0.54.7",
@@ -22,11 +22,12 @@
     "vue": "3.2.37",
     "vue-loader": "17.0.0",
     "vue-router": "4.1.3",
-    "vue-template-compiler": "2.7.8",
+    "vue-template-compiler": "^0.1.0",
     "vuex": "4.0.2"
   },
   "devDependencies": {
     "@types/history": "^5.0.0",
+    "@types/node": "^22.7.3",
     "@types/vue": "^2.0.0",
     "@types/vue-router": "^2.0.0",
     "@typescript-eslint/eslint-plugin": "^5.0.0",

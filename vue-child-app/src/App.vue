@@ -1,9 +1,13 @@
 <style lang="stylus" scoped>
 .root-app
-  background #000064
+  vue-color = #41b782
+  border vue-color 1px solid
+  border-radius 10px
+  background mix(vue-color, transparent, 10%)
   color white
   width 100%
   text-align center
+  padding 20px
   .logo
     size = 100px
     moving-down-size = size / 3
@@ -32,6 +36,7 @@
   <div class="root-app">
     <h1>Vue component</h1>
     <img class="logo" src="/res/vue.svg" alt="vue logo">
+    <div>Prop "caption" value: {{ caption }}</div>
     <router-link :to="{name: 'main'}"><h3><u>To Main page</u></h3></router-link>
 
     <router-view></router-view>
@@ -42,34 +47,41 @@
 </template>
 
 
-<script>
+<script lang="ts">
 import {getCurrentInstance} from "vue";
 import {Modals, Popups} from "@sergtyapkin/modals-popups";
-import API from "./utils/api";
+import {RouteLocationNormalized} from "vue-router";
+import API from "~/API";
 
 
 export default {
   components: {Modals, Popups},
 
+  props: {
+    caption: {
+      type: String,
+      default: "default text"
+    },
+  },
+
   data() {
     return {
-      api: new API(),
     }
   },
 
   async mounted() {
-    // const global = getCurrentInstance().appContext.config.globalProperties;
-    // // Прописываем в глобавльные свойства частоиспользуемые компоненты, чтобы они были доступны из любых других компонентов
-    // global.$user = this.$store.state.user;
-    // global.$modals = this.$refs.modal;
-    // global.$popups = this.$refs.popups;
-    // global.$app = this; // это обычно не используется, но может пригодиться
-    // global.$api = new API();
-    this.api.getTextTask();
+    const global = getCurrentInstance()?.appContext.config.globalProperties;
+    if (global) {
+      // Прописываем в глобавльные свойства частоиспользуемые компоненты, чтобы они были доступны из любых других компонентов
+      global.$modals = this.$refs.modal;
+      global.$popups = this.$refs.popups;
+      global.$app = this; // это обычно не используется, но может пригодиться
+      global.$api = new API();
+    }
   },
 
   watch: {
-    $route(to, from) {
+    $route(to: RouteLocationNormalized, from: RouteLocationNormalized) {
       console.log("Vue child router:", from.path, '->', to.path);
     }
   },

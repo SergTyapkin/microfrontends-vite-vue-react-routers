@@ -1,7 +1,7 @@
 import { defineConfig } from 'vite';
 import Vue from '@vitejs/plugin-vue';
 import basicSsl from '@vitejs/plugin-basic-ssl';
-import path from 'path';
+import * as path from 'path';
 import federation from '@originjs/vite-plugin-federation';
 
 
