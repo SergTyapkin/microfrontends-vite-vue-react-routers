@@ -35,7 +35,7 @@ export default defineConfig(({command, mode}) => ({
         changeOrigin: false,
         // rewrite: (path) => path.replace(/^\/assets/, '/dist/assets'),
       },
-    }
+    },
   },
 
   resolve: {
@@ -51,10 +51,13 @@ export default defineConfig(({command, mode}) => ({
     ]
   },
 
+  publicDir: path.resolve(__dirname, "..", "shared-res", "shared-public"),
   build: {
     modulePreload: false,
     target: 'esnext',
-    minify: false,
+    minify: true,
+    sourcemap: true,
+    manifest: true,
     cssCodeSplit: false,
   },
 }));

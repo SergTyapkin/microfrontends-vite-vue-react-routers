@@ -45,6 +45,7 @@ export default defineConfig(({command, mode}: {command, mode: 'development' | 'p
     ]
   },
 
+  publicDir: path.resolve(__dirname, "..", "shared-res", "shared-public"),
   build: {
     rollupOptions: {
       output: {
@@ -60,7 +61,9 @@ export default defineConfig(({command, mode}: {command, mode: 'development' | 'p
     },
     modulePreload: false,
     target: 'esnext',
-    minify: false,
+    minify: true,
+    sourcemap: true,
+    manifest: true,
     cssCodeSplit: false,
   }
 }));
