@@ -4,7 +4,7 @@ import federation from '@originjs/vite-plugin-federation';
 import * as path from 'path';
 
 
-export default defineConfig(({command, mode}: {command, mode: 'development' | 'production'}) => ({
+export default defineConfig(({command, mode}: {command: "build" | "serve", mode: 'development' | 'production'}) => ({
   plugins: [
     react(),
     federation({

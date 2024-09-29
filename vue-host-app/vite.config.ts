@@ -5,7 +5,7 @@ import * as path from 'path';
 import federation from '@originjs/vite-plugin-federation';
 
 
-export default defineConfig(({command, mode}) => ({
+export default defineConfig(({command, mode}: {command: "build" | "serve", mode: 'development' | 'production'}) => ({
   plugins: [
     Vue({
       include: [/\.vue$/],
