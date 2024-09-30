@@ -1,0 +1,58 @@
+name: ${FRONTEND_COMPOSE_NAME:-frontend-compose}
+services:
+  # Base frontend container. When all certs generated any other nginx containers must be stopped
+  nginx:
+    container_name: ${FRONTEND_COMPOSE_NAME:-frontend-compose}-frontend-nginx
+    build:
+      context: ../
+      dockerfile: ./docker-deploy/Dockerfile
+      args:
+        - BUILD_FRONTEND_PATH
+        - NGINX_RELEASE
+        - NODE_RELEASE
+        - DOMAIN_URL
+        - API_HOST
+        - API_PORT
+    environment:
+      - DOMAIN_URL
+      - API_HOST
+      - API_PORT
+    volumes:
+      - ./dist:/usr/share/nginx/html:rw
+      - ./certbot-${ENV_FILE_NAME}/www:/var/www/certbot/:ro
+      - ./certbot-${ENV_FILE_NAME}/conf/:/etc/nginx/ssl/:ro
+    ports:
+      - ${PORT_HTTP}:80
+      - ${PORT_HTTPS}:443
+      - ${API_PORT}:${API_PORT}
+    networks:
+      - external-front-back
+      - default
+    restart: unless-stopped
+
+  # Needs to serve only http and get certs when certs is not created yet
+  nginx-certbot:
+    container_name: ${FRONTEND_COMPOSE_NAME:-frontend-compose}-nginx-certbot
+    image: nginx:${NGINX_RELEASE}
+    volumes:
+      - ./nginx/nginx_certbot.conf:/etc/nginx/nginx.conf:ro
+      - ./certbot-${ENV_FILE_NAME}/www:/var/www/certbot/:ro
+    ports:
+      - "80:80"
+    restart: no
+
+  # To generate certs:
+  # docker compose up -d nginx-certbot
+  # docker compose run --rm certbot certonly --webroot --webroot-path /var/www/certbot/ -d your.domain
+  # To renew certs:
+  # docker compose run --rm certbot renew
+  certbot:
+    container_name: ${FRONTEND_COMPOSE_NAME:-frontend-compose}-certbot
+    image: certbot/certbot:latest
+    volumes:
+      - ./certbot-${ENV_FILE_NAME}/www/:/var/www/certbot/:rw
+      - ./certbot-${ENV_FILE_NAME}/conf/:/etc/letsencrypt/:rw
+    restart: no
+
+networks:
+  external-front-back:

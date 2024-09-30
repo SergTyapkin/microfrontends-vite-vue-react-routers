@@ -1,0 +1,21 @@
+name: Makefile CI
+
+on:
+  pull_request:
+    branches: [ "*" ]
+
+env:
+  API_PORT: 0
+  DOMAIN_URL: ${{ vars.DEPLOY_HOST }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: create .env files
+      run: cd docker-deploy && for file in .env*.example; do cp $file ${file%.example}; done
+
+    - name: build
+      run: make build
