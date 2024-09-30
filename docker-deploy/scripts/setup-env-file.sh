@@ -10,10 +10,10 @@ nano ./docker-deploy/"$1"
 sudo chmod ugo+rwx -R ./docker-deploy/"$1"
 
 echo ""
-echo "Is your backend deployed on this computer or docker-cluster in docker container? (Y/n): "
+echo "Is your backend deployed on this computer or docker-cluster in docker container? (y/N): "
 read USER_ANSWER
 cat ./docker-deploy/docker-compose.template.yaml > ./docker-deploy/docker-compose.yaml
-if [[ -z $USER_ANSWER ]] || [[ $USER_ANSWER == "Y" ]] || [[ $USER_ANSWER == "y" ]]
+if [[ $USER_ANSWER == "Y" ]] || [[ $USER_ANSWER == "y" ]] || [[ $USER_ANSWER == "yes" ]] || [[ $USER_ANSWER == "Yes" ]] || [[ $USER_ANSWER == "YES" ]]
 then
   echo "Enter the backend container network name (you can edit it after this setting at bottom of docker-compose.yml): "
   read USER_ANSWER
