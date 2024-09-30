@@ -63,7 +63,7 @@ Each application can runs in this modes:
 > [!TIP]
 > **dev mode** - app runs with Vite dev server with Hot Module Reloading for for convenient code editing and instantly showing changes in app.
 
-> [!IMPORTANT]
+> [!WARNING]
 > Host app can't show HMR changes while child apps editing. To load child's app's changes restart `dev`, `build` or `preview` command in child app to rebuild its bundle.
 
 > [!TIP]
