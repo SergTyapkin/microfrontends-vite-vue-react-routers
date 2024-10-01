@@ -30,14 +30,14 @@ microfrontend-vite-vue-react-routers/
 │ ├── package.json
 │ ├── tsconfig.json
 │ └── ...
-├── vue-host-app/ # Host application
+├── vue-child-app/ # Vue remote application
 │ ├── src/
 │ ├── res/
 │ ├── vite.config.ts
 │ ├── package.json
 │ ├── tsconfig.json
 │ └── ...
-├── vue-host-app/ # Host application
+├── react-child-app/ # React remote application
 │ ├── src/
 │ ├── res/
 │ ├── vite.config.ts
