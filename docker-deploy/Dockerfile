@@ -44,6 +44,7 @@ FROM nginx:${NGINX_RELEASE:-1.23}
 #RUN apt-get update -y && apt-get install  --no-install-recommends -y \
 #    nginx-plus-module-brotli
 
+ARG BUILD_FRONTEND_PATH
 COPY --from=build /home/node/front/${BUILD_FRONTEND_PATH}/dist /frontend-dist
 COPY --from=build /home/node/front/docker-deploy/nginx/_nginx-substituted.conf /etc/nginx/nginx.conf
 COPY --from=build /home/node/front/docker-deploy/nginx/locations/_http-substituted /etc/nginx/include_locations/http
