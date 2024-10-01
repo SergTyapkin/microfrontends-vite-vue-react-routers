@@ -4,10 +4,6 @@
 # Or run "make all" directly.                                  |
 #--------------------------------------------------------------
 
-ifneq ($(wildcard ./docker-deploy/$(ENV_FILE_NAME)), "")
-	-include ./docker-deploy/$(ENV_FILE_NAME)
-endif
-
 
 build:
 	echo "[Make]: Running 'build' target in Makefile..." && \
