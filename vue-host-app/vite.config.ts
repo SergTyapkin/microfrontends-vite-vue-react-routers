@@ -34,23 +34,18 @@ export default defineConfig(({command, mode}: {
 
       proxy: {
         [`/assets-${env.VITE_CHILD_APP_1_NAME}`]: {
-          target: `http://localhost:${env.VITE_CHILD_APP_1_PORT}`,
-          secure: false,
+          target: `${env.VITE_CHILD_APP_1_HTTPS === 'true' ? 'https' : 'http'}://${env.VITE_DOMAIN_URL}:${env.VITE_CHILD_APP_1_PORT}`,
+          secure: env.VITE_CHILD_APP_2_HTTPS === 'true',
           changeOrigin: false,
           // rewrite: (path) => path.replace(/^\/assets/, '/dist/assets'),
         },
         [`/assets-${env.VITE_CHILD_APP_2_NAME}`]: {
-          target: `http://localhost:${env.VITE_CHILD_APP_2_PORT}`,
-          secure: false,
+          target: `${env.VITE_CHILD_APP_2_HTTPS === 'true' ? 'https' : 'http'}://${env.VITE_DOMAIN_URL}:${env.VITE_CHILD_APP_2_PORT}`,
+          secure: env.VITE_CHILD_APP_2_HTTPS === 'true',
           changeOrigin: false,
           // rewrite: (path) => path.replace(/^\/assets/, '/dist/assets'),
         },
       },
-    },
-
-    define: {
-      'DEFINE_VITE_IMPORT_APP_1_NAME': JSON.stringify(`${env.VITE_CHILD_APP_1_NAME}/App`),
-      // 'DEFINE_VITE_IMPORT_APP_2_NAME': `${env.VITE_CHILD_APP_2_PORT}\/App`,
     },
 
     resolve: {
