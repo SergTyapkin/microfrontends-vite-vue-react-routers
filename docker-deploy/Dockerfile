@@ -15,10 +15,9 @@ RUN apt-get update -y && apt-get install --no-install-recommends -y \
 
 # build project - create static dist files
 ARG BUILD_FRONTEND_PATH
-RUN cd ${BUILD_FRONTEND_PATH} && \
-    yarn
-RUN cd ${BUILD_FRONTEND_PATH} && \
-    yarn dist
+WORKDIR ${BUILD_FRONTEND_PATH}
+RUN yarn
+RUN yarn dist
 
 # substitute env variables into nginx.conf
 # you can add any your variables that you need to substitute into nginx.conf
@@ -45,7 +44,7 @@ FROM nginx:${NGINX_RELEASE:-1.23}
 #RUN apt-get update -y && apt-get install  --no-install-recommends -y \
 #    nginx-plus-module-brotli
 
-COPY --from=build /home/node/front/dist /frontend-dist
+COPY --from=build /home/node/front/${BUILD_FRONTEND_PATH}/dist /frontend-dist
 COPY --from=build /home/node/front/docker-deploy/nginx/_nginx-substituted.conf /etc/nginx/nginx.conf
 COPY --from=build /home/node/front/docker-deploy/nginx/locations/_http-substituted /etc/nginx/include_locations/http
 COPY --from=build /home/node/front/docker-deploy/nginx/locations/_https-substituted /etc/nginx/include_locations/https
