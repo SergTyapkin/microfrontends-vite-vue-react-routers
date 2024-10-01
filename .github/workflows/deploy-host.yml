@@ -3,7 +3,7 @@ name: Makefile CI
 on:
   push:
     branches: [ "main" ]
-    paths: [ "vue-host-app/*", "shared-res/*", "docker-deploy/*", ".github/workflows/*" ]
+    paths: [ "vue-host-app/**", "shared-res/**", "docker-deploy/**", ".github/workflows/**" ]
 
 jobs:
   deploy-host:
