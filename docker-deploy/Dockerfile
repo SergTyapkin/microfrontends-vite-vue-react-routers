@@ -15,8 +15,8 @@ RUN apt-get update -y && apt-get install --no-install-recommends -y \
 
 # build project - create static dist files
 ARG BUILD_FRONTEND_PATH
-WORKDIR ${BUILD_FRONTEND_PATH}
-RUN yarn
+RUN cd ${BUILD_FRONTEND_PATH} && \
+    yarn
 RUN yarn dist
 
 # substitute env variables into nginx.conf
