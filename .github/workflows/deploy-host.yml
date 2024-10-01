@@ -6,7 +6,7 @@ on:
     paths: [ "vue-host-app/*", "shared-res/*" ]
 
 jobs:
-  deploy:
+  deploy-host:
     runs-on: ubuntu-latest
     environment: deploy
     steps:

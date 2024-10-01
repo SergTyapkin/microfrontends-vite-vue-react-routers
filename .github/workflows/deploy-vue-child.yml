@@ -6,7 +6,7 @@ on:
     paths: [ "vue-child-app/*", "shared-res/*" ]
 
 jobs:
-  deploy:
+  deploy-vue-child:
     runs-on: ubuntu-latest
     environment: deploy
     steps:
