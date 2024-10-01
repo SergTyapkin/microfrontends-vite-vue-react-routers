@@ -24,9 +24,11 @@ RUN yarn dist
 ARG DOMAIN_URL
 ARG API_HOST
 ARG API_PORT
+ARG ENABLE_HTTPS
 RUN export DOMAIN_URL=${DOMAIN_URL} && \
     export API_HOST=${API_HOST} && \
     export API_PORT=${API_PORT} && \
+    export ENABLE_HTTPS=${ENABLE_HTTPS} && \
     export DOLLAR="$" && \
     envsubst < /home/node/front/docker-deploy/nginx/nginx.conf > /home/node/front/docker-deploy/nginx/_nginx-substituted.conf && \
     cd /home/node/front/docker-deploy/nginx/locations/http && \
