@@ -3,7 +3,7 @@ name: Makefile CI
 on:
   push:
     branches: [ "main" ]
-    paths: [ "react-child-app/*", "shared-res/*" ]
+    paths: [ "react-child-app/*", "shared-res/*", "docker-deploy/*", ".github/workflows/*" ]
 
 jobs:
   deploy-react-child:
