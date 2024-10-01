@@ -1,4 +1,4 @@
-# Microfrontend Demo with Vite Module Federation, Vue, React, Vue-router, Vuex, and TypeScript
+# Microfrontend Template with Vite Module Federation, Vue, React, Vue-router, Vuex, and TypeScript
 
 This repository demonstrates a microfrontend architecture using Vite's Module Federation plugin, React, and TypeScript. The demo consists of one host application (`vue-host-app`) and two remote applications (`vue-child-app` and `react-child-app`).
 
