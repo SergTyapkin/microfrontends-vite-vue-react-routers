@@ -13,8 +13,6 @@ services:
         - DOMAIN_URL
         - API_HOST
         - API_PORT
-        - PORT_HTTP
-        - PORT_HTTPS
     environment:
       - DOMAIN_URL
       - API_HOST
