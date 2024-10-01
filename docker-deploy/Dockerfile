@@ -29,16 +29,17 @@ RUN export DOMAIN_URL=${DOMAIN_URL} && \
     export API_HOST=${API_HOST} && \
     export API_PORT=${API_PORT} && \
     export DOLLAR="$" && \
-    if [[ ${ENABLE_HTTPS} = "true" ]] || [[ ${ENABLE_HTTPS} = "True" ]] then && \
-      envsubst < /home/node/front/docker-deploy/nginx/nginx.conf > /home/node/front/docker-deploy/nginx/_nginx-substituted.conf && \
-    else && \
-      envsubst < /home/node/front/docker-deploy/nginx/nginx_only_http.conf > /home/node/front/docker-deploy/nginx/_nginx-substituted.conf && \
+    cd /home/node/front/docker-deploy/nginx && \
+    if [[ ${ENABLE_HTTPS} = "true" ]] || [[ ${ENABLE_HTTPS} = "True" ]]; then \
+      envsubst < nginx.conf > _nginx-substituted.conf; \
+    else \
+      envsubst < nginx_only_http.conf > _nginx-substituted.conf; \
     fi && \
-    cd /home/node/front/docker-deploy/nginx/locations/http && \
-    mkdir /home/node/front/docker-deploy/nginx/locations/_http-substituted && \
+    cd ./docker-deploy/nginx/locations/http && \
+    mkdir ../_http-substituted && \
     for file in *; do envsubst < $file > ../_http-substituted/$file; done && \
-    cd /home/node/front/docker-deploy/nginx/locations/https && \
-    mkdir /home/node/front/docker-deploy/nginx/locations/_https-substituted && \
+    cd ../https && \
+    mkdir ../_https-substituted && \
     for file in *; do envsubst < $file > ../_https-substituted/$file; done
 
 
@@ -50,7 +51,7 @@ FROM nginx:${NGINX_RELEASE:-1.23}
 #    nginx-plus-module-brotli
 
 ARG BUILD_FRONTEND_PATH
-COPY --from=build /home/node/front/${BUILD_FRONTEND_PATH}/dist /frontend-dist
-COPY --from=build /home/node/front/docker-deploy/nginx/_nginx-substituted.conf /etc/nginx/nginx.conf
-COPY --from=build /home/node/front/docker-deploy/nginx/locations/_http-substituted /etc/nginx/include_locations/http
-COPY --from=build /home/node/front/docker-deploy/nginx/locations/_https-substituted /etc/nginx/include_locations/https
+COPY --from=build ./${BUILD_FRONTEND_PATH}/dist /frontend-dist
+COPY --from=build ./docker-deploy/nginx/_nginx-substituted.conf /etc/nginx/nginx.conf
+COPY --from=build ./docker-deploy/nginx/locations/_http-substituted /etc/nginx/include_locations/http
+COPY --from=build ./docker-deploy/nginx/locations/_https-substituted /etc/nginx/include_locations/https
