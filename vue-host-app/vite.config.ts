@@ -20,8 +20,8 @@ export default defineConfig(({command, mode}: {
       federation({
         name: 'host',
         remotes: {
-          [env.VITE_CHILD_APP_1_NAME]: `http://localhost:${env.VITE_CHILD_APP_1_PORT}/assets/remoteEntryPoint.js`,
-          [env.VITE_CHILD_APP_2_NAME]: `http://localhost:${env.VITE_CHILD_APP_2_PORT}/assets/remoteEntryPoint.js`,
+          [env.VITE_CHILD_APP_1_NAME]: `${env.VITE_CHILD_APP_1_HTTPS === 'true' ? 'https' : 'http'}://${env.VITE_DOMAIN_URL}:${env.VITE_CHILD_APP_1_PORT}/assets/remoteEntryPoint.js`,
+          [env.VITE_CHILD_APP_2_NAME]: `${env.VITE_CHILD_APP_2_HTTPS === 'true' ? 'https' : 'http'}://${env.VITE_DOMAIN_URL}:${env.VITE_CHILD_APP_2_PORT}/assets/remoteEntryPoint.js`,
         },
         shared: ['vue', 'vue-router', 'vuex'],
       }),
