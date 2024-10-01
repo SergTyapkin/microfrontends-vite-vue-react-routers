@@ -17,7 +17,8 @@ RUN apt-get update -y && apt-get install --no-install-recommends -y \
 ARG BUILD_FRONTEND_PATH
 RUN cd ${BUILD_FRONTEND_PATH} && \
     yarn
-RUN yarn dist
+RUN cd ${BUILD_FRONTEND_PATH} && \
+    yarn dist
 
 # substitute env variables into nginx.conf
 # you can add any your variables that you need to substitute into nginx.conf
