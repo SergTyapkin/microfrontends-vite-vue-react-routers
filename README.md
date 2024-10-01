@@ -77,7 +77,7 @@ Follow these steps to install the dependencies for each application and run it.
 ### Host Application
 
 > [!IMPORTANT]
-> To run every app you need to copy the `.env.example` file to the `.env` file in project root. 
+> To run every app you need to run `make all` or copy the `.env.example` file to the `.env` file in project root manually. 
 
 1. Navigate to the `main` directory:
     ```sh

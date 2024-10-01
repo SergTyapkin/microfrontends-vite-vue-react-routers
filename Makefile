@@ -58,19 +58,25 @@ setup-env-file:
 	echo "[Make]: Running 'setup-env-file' target in Makefile..." && \
 	bash ./docker-deploy/scripts/setup-env-file.sh $(ENV_FILE_NAME)
 
+copy-env-file-if-not-exists:
+	echo "[Make]: Running 'copy-env-file-if-not-exists' target in Makefile..." && \
+	bash ./docker-deploy/scripts/copy-env-file-if-not-exists.sh
+
 all-for-app:
 	echo "[Make]: Running 'all-for-app' target in Makefile..." && \
 	echo 'Now we start setup for app specified in env fle: $(ENV_FILE_NAME)' && \
 	echo '[To start press Enter...]' && \
-    read ENTER
+	read ENTER
 	make setup-env-file # for every app
 	make generate-certs # for every app
 	make setup-auto-renewing-certs # for every app
 	make down # for every app
 	make update # for every app
 
+
 all:
 	echo "[Make]: Running 'all' target in Makefile..." && \
+	make copy-env-file-if-not-exists
 	make install-docker-if-not-exists
 	make all-for-app ENV_FILE_NAME=.env.vue-child
 	make all-for-app ENV_FILE_NAME=.env.react-child
