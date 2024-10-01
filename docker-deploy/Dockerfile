@@ -24,10 +24,14 @@ RUN yarn dist
 ARG DOMAIN_URL
 ARG API_HOST
 ARG API_PORT
+ARG PORT_HTTP
+ARG PORT_HTTPS
 ARG ENABLE_HTTPS
 RUN export DOMAIN_URL=${DOMAIN_URL} && \
     export API_HOST=${API_HOST} && \
     export API_PORT=${API_PORT} && \
+    export PORT_HTTP=${PORT_HTTP} && \
+    export PORT_HTTPS=${PORT_HTTPS} && \
     export DOLLAR="$" && \
     cd /home/node/front/docker-deploy/nginx && \
     if [[ ${ENABLE_HTTPS} = "true" ]] || [[ ${ENABLE_HTTPS} = "True" ]]; then \
