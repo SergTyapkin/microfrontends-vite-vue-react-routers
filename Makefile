@@ -4,7 +4,9 @@
 # Or run "make all" directly.                                  |
 #--------------------------------------------------------------
 
--include ./docker-deploy/$(ENV_FILE_NAME)
+ifneq ($(wildcard ./docker-deploy/$(ENV_FILE_NAME)), "")
+	-include ./docker-deploy/$(ENV_FILE_NAME)
+endif
 
 
 build:
