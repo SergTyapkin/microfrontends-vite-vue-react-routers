@@ -119,7 +119,6 @@ Follow these steps to install the dependencies for each application and run it.
 
 3. Run app in which mode you want: <br> See the command in [↑ table of run commands ↑](#table-of-run-commands)
 
-> [!TIP]
 > Open your browser and go to http://localhost:5173 (or the port specified in your .env file) to see the application in action. <br>
 To see every child app you can go to http://localhost:5001 (vue-app) and http://localhost:5002 (react-app)
 
