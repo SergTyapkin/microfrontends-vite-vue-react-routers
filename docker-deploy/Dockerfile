@@ -35,7 +35,7 @@ RUN export DOMAIN_URL=${DOMAIN_URL} && \
     else \
       envsubst < nginx_only_http.conf > _nginx-substituted.conf; \
     fi && \
-    cd ./docker-deploy/nginx/locations/http && \
+    cd ./locations/http && \
     mkdir ../_http-substituted && \
     for file in *; do envsubst < $file > ../_http-substituted/$file; done && \
     cd ../https && \
