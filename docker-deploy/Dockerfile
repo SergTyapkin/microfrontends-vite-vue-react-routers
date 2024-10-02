@@ -32,10 +32,10 @@ ARG API_HOST
 ARG API_PORT
 ARG PORT_HTTP
 ARG ENABLE_HTTPS
-RUN if [ ${PORT_HTTP} -neq 80 ]; then \
-      export DOMAIN_URL="${VITE_DOMAIN_URL}:${PORT_HTTP}"; \
+RUN if [ ${PORT_HTTP} != 80 ]; then \
+      export DOMAIN_URL=${VITE_DOMAIN_URL}:${PORT_HTTP}; \
     else \
-      export DOMAIN_URL="${VITE_DOMAIN_URL}"; \
+      export DOMAIN_URL=${VITE_DOMAIN_URL}; \
     fi && \
     export VITE_DOMAIN_URL=${VITE_DOMAIN_URL} && \
     export VITE_CHILD_APP_1_NAME=${VITE_CHILD_APP_1_NAME} && \
@@ -45,14 +45,14 @@ RUN if [ ${PORT_HTTP} -neq 80 ]; then \
     export API_HOST=${API_HOST} && \
     export API_PORT=${API_PORT} && \
     if [ ${VITE_CHILD_APP_1_HTTPS} = "true" ] || [ ${VITE_CHILD_APP_1_HTTPS} = "True" ]; then \
-      export CHILD_APP_1_SCHEME="https"; \
+      export CHILD_APP_1_SCHEME=https; \
     else \
-      export CHILD_APP_1_SCHEME="http"; \
+      export CHILD_APP_1_SCHEME=http; \
     fi && \
     if [ ${VITE_CHILD_APP_2_HTTPS} = "true" ] || [ ${VITE_CHILD_APP_2_HTTPS} = "True" ]; then \
-      export CHILD_APP_2_SCHEME="https"; \
+      export CHILD_APP_2_SCHEME=https; \
     else \
-      export CHILD_APP_2_SCHEME="http"; \
+      export CHILD_APP_2_SCHEME=http; \
     fi && \
     export DOLLAR="$" && \
     cd /home/node/front/docker-deploy/nginx && \
