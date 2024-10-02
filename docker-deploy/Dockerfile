@@ -56,6 +56,11 @@ RUN if [ "${PORT_HTTP}" != "80" ]; then \
     else \
       export CHILD_APP_2_SCHEME=http; \
     fi && \
+    if [ ${IS_HOST_APP} = "true" ] || [ ${IS_HOST_APP} = "True" ]; then \
+      export "NGINX_INCLUDE_PROXY_ASSETS_STRING=include /etc/nginx/include_locations/https/proxy-assets.conf;"; \
+    else \
+      export "NGINX_INCLUDE_PROXY_ASSETS_STRING="; \
+    fi && \
     export DOLLAR="$" && \
     \
     cd /home/node/front/docker-deploy/nginx && \
