@@ -65,8 +65,8 @@ export default defineConfig(({command, mode}: {
     build: {
       modulePreload: false,
       target: 'esnext',
-      minify: true,
-      sourcemap: true,
+      minify: false,
+      // sourcemap: true,
       manifest: true,
       cssCodeSplit: false,
     },
