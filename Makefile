@@ -21,6 +21,11 @@ down: # for every app
 	echo "[Make]: Running 'down' target in Makefile..." && \
 	cd docker-deploy && \
 	docker compose --env-file $(ENV_FILE_NAME) --env-file ../.env down
+down-all:
+	echo "[Make]: Running 'down-all' target in Makefile..." && \
+	make down ENV_FILE_NAME=.env.vue-child
+	make down ENV_FILE_NAME=.env.react-child
+	make down ENV_FILE_NAME=.env.host
 
 generate-certs: # for every app
 	bash ./docker-deploy/scripts/check-env-file-name-provided.sh $(ENV_FILE_NAME) && \

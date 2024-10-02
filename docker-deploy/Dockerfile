@@ -20,6 +20,7 @@ RUN yarn
 RUN yarn dist
 
 # setup env variables
+# and substitute env variables into nginx.conf
 ARG VITE_DOMAIN_URL
 ARG VITE_CHILD_APP_1_NAME
 ARG VITE_CHILD_APP_1_PORT
@@ -43,20 +44,19 @@ RUN if [ "${PORT_HTTP}" != "80" ]; then \
     export VITE_CHILD_APP_2_PORT=${VITE_CHILD_APP_2_PORT} && \
     export API_HOST=${API_HOST} && \
     export API_PORT=${API_PORT} && \
-    if [ "${VITE_CHILD_APP_1_HTTPS}" = "true" ] || [ "${VITE_CHILD_APP_1_HTTPS}" = "True" ]; then \
+    if [ ${VITE_CHILD_APP_1_HTTPS} = "true" ] || [ ${VITE_CHILD_APP_1_HTTPS} = "True" ]; then \
       export CHILD_APP_1_SCHEME=https; \
     else \
       export CHILD_APP_1_SCHEME=http; \
     fi && \
-    if [ "${VITE_CHILD_APP_2_HTTPS}" = "true" ] || [ "${VITE_CHILD_APP_2_HTTPS}" = "True" ]; then \
+    if [ ${VITE_CHILD_APP_2_HTTPS} = "true" ] || [ ${VITE_CHILD_APP_2_HTTPS} = "True" ]; then \
       export CHILD_APP_2_SCHEME=https; \
     else \
       export CHILD_APP_2_SCHEME=http; \
     fi && \
-    export DOLLAR="$"
-
-# substitute env variables into nginx.conf
-RUN cd /home/node/front/docker-deploy/nginx && \
+    export DOLLAR="$" && \
+    \
+    cd /home/node/front/docker-deploy/nginx && \
     if [ "${ENABLE_HTTPS}" = "true" ] || [ "${ENABLE_HTTPS}" = "True" ]; then \
       envsubst < nginx.conf > _nginx-substituted.conf && \
       export ; \
