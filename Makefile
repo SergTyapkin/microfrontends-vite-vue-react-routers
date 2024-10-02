@@ -5,32 +5,38 @@
 #--------------------------------------------------------------
 
 
-build:
+build: # for every app
+	bash ./docker-deploy/scripts/check-env-file-name-provided.sh $(ENV_FILE_NAME)
 	echo "[Make]: Running 'build' target in Makefile..." && \
 	cd docker-deploy && \
 	docker compose --env-file $(ENV_FILE_NAME) build --no-cache --progress=plain nginx
-run:
+run: # for every app
+	bash ./docker-deploy/scripts/check-env-file-name-provided.sh $(ENV_FILE_NAME)
 	echo "[Make]: Running 'run' target in Makefile..." && \
 	cd docker-deploy && \
 	docker compose --env-file $(ENV_FILE_NAME) down && \
 	docker compose --env-file $(ENV_FILE_NAME) up -d nginx
-down:
+down: # for every app
+	bash ./docker-deploy/scripts/check-env-file-name-provided.sh $(ENV_FILE_NAME)
 	echo "[Make]: Running 'down' target in Makefile..." && \
 	cd docker-deploy && \
 	docker compose --env-file $(ENV_FILE_NAME) down
 
-generate-certs:
+generate-certs: # for every app
+	bash ./docker-deploy/scripts/check-env-file-name-provided.sh $(ENV_FILE_NAME)
 	echo "[Make]: Running 'generate-certs' target in Makefile..." && \
 	bash ./docker-deploy/scripts/generate-certs.sh $(ENV_FILE_NAME)
-renew-certs:
+renew-certs: # for every app
+	bash ./docker-deploy/scripts/check-env-file-name-provided.sh $(ENV_FILE_NAME)
 	echo "[Make]: Running 'renew-certs' target in Makefile..." && \
 	cd docker-deploy && \
 	docker compose run --rm certbot renew $(ENV_FILE_NAME)
-setup-auto-renewing-certs:
+setup-auto-renewing-certs: # for every app
 	echo "[Make]: Running 'setup-auto-renewing-certs' target in Makefile..." && \
 	bash ./docker-deploy/scripts/setup-auto-renewing-certs.sh $(ENV_FILE_NAME)
 
-update:
+update: # for every app
+	bash ./docker-deploy/scripts/check-env-file-name-provided.sh $(ENV_FILE_NAME)
 	echo "[Make]: Running 'update' target in Makefile..." && \
 	bash ./docker-deploy/scripts/update-deploy.sh $(ENV_FILE_NAME)
 
@@ -53,7 +59,8 @@ set-docker-not-sudo:
 	echo "[Make]: Running 'set-docker-not-sudo' target in Makefile..." && \
 	bash ./docker-deploy/scripts/set-docker-not-sudo.sh
 
-setup-env-file:
+setup-env-file: # for every app
+	bash ./docker-deploy/scripts/check-env-file-name-provided.sh $(ENV_FILE_NAME)
 	echo "[Make]: Running 'setup-env-file' target in Makefile..." && \
 	bash ./docker-deploy/scripts/setup-env-file.sh $(ENV_FILE_NAME)
 
@@ -61,7 +68,8 @@ copy-env-file-if-not-exists:
 	echo "[Make]: Running 'copy-env-file-if-not-exists' target in Makefile..." && \
 	bash ./docker-deploy/scripts/copy-env-file-if-not-exists.sh
 
-all-for-app:
+all-for-app: # for every app
+	bash ./docker-deploy/scripts/check-env-file-name-provided.sh $(ENV_FILE_NAME)
 	echo "[Make]: Running 'all-for-app' target in Makefile..." && \
 	echo 'Now we start setup for app specified in env fle: $(ENV_FILE_NAME)' && \
 	echo '[To start press Enter...]' && \
