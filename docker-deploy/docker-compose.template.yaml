@@ -7,10 +7,17 @@ services:
       context: ../
       dockerfile: ./docker-deploy/Dockerfile
       args:
+        - VITE_DOMAIN_URL
+        - VITE_CHILD_APP_1_NAME
+        - VITE_CHILD_APP_1_PORT
+        - VITE_CHILD_APP_1_HTTPS
+        - VITE_CHILD_APP_2_NAME
+        - VITE_CHILD_APP_2_PORT
+        - VITE_CHILD_APP_2_HTTPS
         - BUILD_FRONTEND_PATH
         - NGINX_RELEASE
         - NODE_RELEASE
-        - DOMAIN_URL
+        - PORT_HTTP
         - API_HOST
         - API_PORT
         - ENABLE_HTTPS

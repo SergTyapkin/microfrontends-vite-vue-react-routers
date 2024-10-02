@@ -6,37 +6,37 @@
 
 
 build: # for every app
-	bash ./docker-deploy/scripts/check-env-file-name-provided.sh $(ENV_FILE_NAME)
+	bash ./docker-deploy/scripts/check-env-file-name-provided.sh $(ENV_FILE_NAME) && \
 	echo "[Make]: Running 'build' target in Makefile..." && \
 	cd docker-deploy && \
-	docker compose --env-file $(ENV_FILE_NAME) build --no-cache --progress=plain nginx
+	docker compose --env-file $(ENV_FILE_NAME) --env-file ../.env build --no-cache --progress=plain nginx
 run: # for every app
-	bash ./docker-deploy/scripts/check-env-file-name-provided.sh $(ENV_FILE_NAME)
+	bash ./docker-deploy/scripts/check-env-file-name-provided.sh $(ENV_FILE_NAME) && \
 	echo "[Make]: Running 'run' target in Makefile..." && \
 	cd docker-deploy && \
-	docker compose --env-file $(ENV_FILE_NAME) down && \
-	docker compose --env-file $(ENV_FILE_NAME) up -d nginx
+	docker compose --env-file $(ENV_FILE_NAME) --env-file ../.env down && \
+	docker compose --env-file $(ENV_FILE_NAME) --env-file ../.env up -d nginx
 down: # for every app
-	bash ./docker-deploy/scripts/check-env-file-name-provided.sh $(ENV_FILE_NAME)
+	bash ./docker-deploy/scripts/check-env-file-name-provided.sh $(ENV_FILE_NAME) && \
 	echo "[Make]: Running 'down' target in Makefile..." && \
 	cd docker-deploy && \
-	docker compose --env-file $(ENV_FILE_NAME) down
+	docker compose --env-file $(ENV_FILE_NAME) --env-file ../.env down
 
 generate-certs: # for every app
-	bash ./docker-deploy/scripts/check-env-file-name-provided.sh $(ENV_FILE_NAME)
+	bash ./docker-deploy/scripts/check-env-file-name-provided.sh $(ENV_FILE_NAME) && \
 	echo "[Make]: Running 'generate-certs' target in Makefile..." && \
 	bash ./docker-deploy/scripts/generate-certs.sh $(ENV_FILE_NAME)
 renew-certs: # for every app
-	bash ./docker-deploy/scripts/check-env-file-name-provided.sh $(ENV_FILE_NAME)
+	bash ./docker-deploy/scripts/check-env-file-name-provided.sh $(ENV_FILE_NAME) && \
 	echo "[Make]: Running 'renew-certs' target in Makefile..." && \
 	cd docker-deploy && \
-	docker compose run --rm certbot renew $(ENV_FILE_NAME)
+	docker compose --env-file $(ENV_FILE_NAME) --env-file ../.env run --rm certbot renew
 setup-auto-renewing-certs: # for every app
 	echo "[Make]: Running 'setup-auto-renewing-certs' target in Makefile..." && \
 	bash ./docker-deploy/scripts/setup-auto-renewing-certs.sh $(ENV_FILE_NAME)
 
 update: # for every app
-	bash ./docker-deploy/scripts/check-env-file-name-provided.sh $(ENV_FILE_NAME)
+	bash ./docker-deploy/scripts/check-env-file-name-provided.sh $(ENV_FILE_NAME) && \
 	echo "[Make]: Running 'update' target in Makefile..." && \
 	bash ./docker-deploy/scripts/update-deploy.sh $(ENV_FILE_NAME)
 
@@ -60,7 +60,7 @@ set-docker-not-sudo:
 	bash ./docker-deploy/scripts/set-docker-not-sudo.sh
 
 setup-env-file: # for every app
-	bash ./docker-deploy/scripts/check-env-file-name-provided.sh $(ENV_FILE_NAME)
+	bash ./docker-deploy/scripts/check-env-file-name-provided.sh $(ENV_FILE_NAME) && \
 	echo "[Make]: Running 'setup-env-file' target in Makefile..." && \
 	bash ./docker-deploy/scripts/setup-env-file.sh $(ENV_FILE_NAME)
 
@@ -69,7 +69,7 @@ copy-env-file-if-not-exists:
 	bash ./docker-deploy/scripts/copy-env-file-if-not-exists.sh
 
 all-for-app: # for every app
-	bash ./docker-deploy/scripts/check-env-file-name-provided.sh $(ENV_FILE_NAME)
+	bash ./docker-deploy/scripts/check-env-file-name-provided.sh $(ENV_FILE_NAME) && \
 	echo "[Make]: Running 'all-for-app' target in Makefile..." && \
 	echo 'Now we start setup for app specified in env fle: $(ENV_FILE_NAME)' && \
 	echo '[To start press Enter...]' && \
