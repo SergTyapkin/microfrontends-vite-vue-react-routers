@@ -32,6 +32,7 @@ ARG API_HOST
 ARG API_PORT
 ARG PORT_HTTP
 ARG ENABLE_HTTPS
+ARG IS_HOST_APP
 RUN if [ "${PORT_HTTP}" != "80" ]; then \
       export DOMAIN_URL=${VITE_DOMAIN_URL}:${PORT_HTTP}; \
     else \
@@ -44,6 +45,7 @@ RUN if [ "${PORT_HTTP}" != "80" ]; then \
     export VITE_CHILD_APP_2_PORT=${VITE_CHILD_APP_2_PORT} && \
     export API_HOST=${API_HOST} && \
     export API_PORT=${API_PORT} && \
+    export IS_HOST_APP=${IS_HOST_APP} && \
     if [ ${VITE_CHILD_APP_1_HTTPS} = "true" ] || [ ${VITE_CHILD_APP_1_HTTPS} = "True" ]; then \
       export CHILD_APP_1_SCHEME=https; \
     else \

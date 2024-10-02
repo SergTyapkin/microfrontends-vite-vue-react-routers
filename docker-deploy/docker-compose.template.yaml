@@ -21,8 +21,8 @@ services:
         - API_HOST
         - API_PORT
         - ENABLE_HTTPS
+        - IS_HOST_APP
     environment:
-      - DOMAIN_URL
       - API_HOST
       - API_PORT
     volumes:

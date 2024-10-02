@@ -1,9 +1,11 @@
 cp --no-clobber ./docker-deploy/"$1".example ./docker-deploy/"$1"
 echo ""
 echo "You must edit $1 file."
-echo "Write right DOMAIN_URL without https:// and url paths!"
 echo "Set right API_HOST - it's host of backend. If backend deployed in local docker - it's the name of docker container"
 echo "Set right API_PORT - it's port of backend"
+echo "Set right ENABLE_HTTPS (true or false)"
+echo "Set right PORT_HTTP and PORT_HTTPS - (if you don't need https, set any number that > 8000 and < 64000)"
+echo "Set right DEPLOY_BRANCH (if it's not 'main')"
 echo "[press Enter...]"
 read ENTER
 nano ./docker-deploy/"$1"
