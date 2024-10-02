@@ -31,7 +31,7 @@ ARG API_HOST
 ARG API_PORT
 ARG PORT_HTTP
 ARG ENABLE_HTTPS
-RUN if [ ${PORT_HTTP} != 80 ]; then \
+RUN if [ "${PORT_HTTP}" != "80" ]; then \
       export DOMAIN_URL=${VITE_DOMAIN_URL}:${PORT_HTTP}; \
     else \
       export DOMAIN_URL=${VITE_DOMAIN_URL}; \
@@ -43,12 +43,12 @@ RUN if [ ${PORT_HTTP} != 80 ]; then \
     export VITE_CHILD_APP_2_PORT=${VITE_CHILD_APP_2_PORT} && \
     export API_HOST=${API_HOST} && \
     export API_PORT=${API_PORT} && \
-    if [ ${VITE_CHILD_APP_1_HTTPS} = "true" ] || [ ${VITE_CHILD_APP_1_HTTPS} = "True" ]; then \
+    if [ "${VITE_CHILD_APP_1_HTTPS}" = "true" ] || [ "${VITE_CHILD_APP_1_HTTPS}" = "True" ]; then \
       export CHILD_APP_1_SCHEME=https; \
     else \
       export CHILD_APP_1_SCHEME=http; \
     fi && \
-    if [ ${VITE_CHILD_APP_2_HTTPS} = "true" ] || [ ${VITE_CHILD_APP_2_HTTPS} = "True" ]; then \
+    if [ "${VITE_CHILD_APP_2_HTTPS}" = "true" ] || [ "${VITE_CHILD_APP_2_HTTPS}" = "True" ]; then \
       export CHILD_APP_2_SCHEME=https; \
     else \
       export CHILD_APP_2_SCHEME=http; \
@@ -57,7 +57,7 @@ RUN if [ ${PORT_HTTP} != 80 ]; then \
 
 # substitute env variables into nginx.conf
 RUN cd /home/node/front/docker-deploy/nginx && \
-    if [ ${ENABLE_HTTPS} = "true" ] || [ ${ENABLE_HTTPS} = "True" ]; then \
+    if [ "${ENABLE_HTTPS}" = "true" ] || [ "${ENABLE_HTTPS}" = "True" ]; then \
       envsubst < nginx.conf > _nginx-substituted.conf && \
       export ; \
     else \
