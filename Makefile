@@ -22,7 +22,7 @@ down: # for every app
 	cd docker-deploy && \
 	docker compose --env-file $(ENV_FILE_NAME) --env-file ../.env down
 down-all:
-	echo "[Make]: Running 'down-all' target in Makefile..." && \
+	echo "[Make]: Running 'down-all' target in Makefile..."
 	make down ENV_FILE_NAME=.env.vue-child
 	make down ENV_FILE_NAME=.env.react-child
 	make down ENV_FILE_NAME=.env.host
@@ -44,6 +44,11 @@ update: # for every app
 	bash ./docker-deploy/scripts/check-env-file-name-provided.sh $(ENV_FILE_NAME) && \
 	echo "[Make]: Running 'update' target in Makefile..." && \
 	bash ./docker-deploy/scripts/update-deploy.sh $(ENV_FILE_NAME)
+update-all:
+	echo "[Make]: Running 'update-all' target in Makefile..."
+	make update ENV_FILE_NAME=.env.vue-child
+	make update ENV_FILE_NAME=.env.react-child
+	make update ENV_FILE_NAME=.env.host
 
 update-all:
 	echo "[Make]: Running 'update-all' target in Makefile..." && \
