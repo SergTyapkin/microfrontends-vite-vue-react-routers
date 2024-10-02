@@ -30,7 +30,7 @@ RUN export DOMAIN_URL=${DOMAIN_URL} && \
     export API_PORT=${API_PORT} && \
     export DOLLAR="$" && \
     cd /home/node/front/docker-deploy/nginx && \
-    if [[ ${ENABLE_HTTPS} = "true" ]] || [[ ${ENABLE_HTTPS} = "True" ]]; then \
+    if [ ${ENABLE_HTTPS} = "true" ] || [ ${ENABLE_HTTPS} = "True" ]; then \
       envsubst < nginx.conf > _nginx-substituted.conf; \
     else \
       envsubst < nginx_only_http.conf > _nginx-substituted.conf; \
