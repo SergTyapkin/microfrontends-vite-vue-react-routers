@@ -19,8 +19,7 @@ WORKDIR ${BUILD_FRONTEND_PATH}
 RUN yarn
 RUN yarn dist
 
-# substitute env variables into nginx.conf
-# you can add any your variables that you need to substitute into nginx.conf
+# setup env variables
 ARG VITE_DOMAIN_URL
 ARG VITE_CHILD_APP_1_NAME
 ARG VITE_CHILD_APP_1_PORT
@@ -54,8 +53,10 @@ RUN if [ ${PORT_HTTP} != 80 ]; then \
     else \
       export CHILD_APP_2_SCHEME=http; \
     fi && \
-    export DOLLAR="$" && \
-    cd /home/node/front/docker-deploy/nginx && \
+    export DOLLAR="$"
+
+# substitute env variables into nginx.conf
+RUN cd /home/node/front/docker-deploy/nginx && \
     if [ ${ENABLE_HTTPS} = "true" ] || [ ${ENABLE_HTTPS} = "True" ]; then \
       envsubst < nginx.conf > _nginx-substituted.conf && \
       export ; \
