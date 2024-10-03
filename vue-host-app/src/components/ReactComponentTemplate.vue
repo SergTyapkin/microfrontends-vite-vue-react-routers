@@ -1,15 +1,30 @@
 <template>
-  <div></div>
+  <div>
+    <Placeholder :width="placeholderWidth" :height="placeholderHeight" show-loading-symbol></Placeholder>
+  </div>
 </template>
 
 <script>
+import CircleLoading from "~/components/loaders/CircleLoading.vue";
+import Placeholder from "~/components/loaders/Placeholder.vue";
+
 export default {
+  components: {Placeholder, CircleLoading},
+
   props: {
     reactImportPromise: Promise,
     elementProps: {
       type: Object,
       default: {},
     },
+    placeholderHeight: {
+      type: String,
+      default: "500px",
+    },
+    placeholderWidth: {
+      type: String,
+      default: "100%",
+    }
   },
 
   data() {
