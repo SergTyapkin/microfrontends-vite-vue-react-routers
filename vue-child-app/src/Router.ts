@@ -39,7 +39,6 @@ export default function createVueRouter(Store: Store, initialPath: string, befor
   Router.beforeEach(async (to: RouteLocationNormalized, from: RouteLocationNormalized, next: NavigationGuardNext) => {
     to;
     from;
-    console.log("VUE ROUTER", to, from)
     beforeEach(to.path);
 
     // if (!router_got_user) {
