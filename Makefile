@@ -10,12 +10,24 @@ build: # for every app
 	echo "[Make]: Running 'build' target in Makefile..." && \
 	cd docker-deploy && \
 	docker compose --env-file $(ENV_FILE_NAME) --env-file ../.env build --no-cache --progress=plain nginx
+build-all:
+	echo "[Make]: Running 'build-all' target in Makefile..."
+	make build ENV_FILE_NAME=.env.vue-child
+	make build ENV_FILE_NAME=.env.react-child
+	make build ENV_FILE_NAME=.env.host
+
 run: # for every app
 	bash ./docker-deploy/scripts/check-env-file-name-provided.sh $(ENV_FILE_NAME) && \
 	echo "[Make]: Running 'run' target in Makefile..." && \
 	cd docker-deploy && \
 	docker compose --env-file $(ENV_FILE_NAME) --env-file ../.env down && \
 	docker compose --env-file $(ENV_FILE_NAME) --env-file ../.env up -d nginx
+run-all:
+	echo "[Make]: Running 'run-all' target in Makefile..."
+	make run ENV_FILE_NAME=.env.vue-child
+	make run ENV_FILE_NAME=.env.react-child
+	make run ENV_FILE_NAME=.env.host
+
 down: # for every app
 	bash ./docker-deploy/scripts/check-env-file-name-provided.sh $(ENV_FILE_NAME) && \
 	echo "[Make]: Running 'down' target in Makefile..." && \
