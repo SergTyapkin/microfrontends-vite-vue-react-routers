@@ -3,6 +3,7 @@ import react from '@vitejs/plugin-react';
 import basicSsl from '@vitejs/plugin-basic-ssl';
 import federation from '@originjs/vite-plugin-federation';
 import * as path from 'path';
+import {PreRenderedAsset, PreRenderedChunk} from "rollup";
 
 
 export default defineConfig(({command, mode}: {
@@ -17,12 +18,12 @@ export default defineConfig(({command, mode}: {
       react(),
       federation({
         name: env.VITE_CHILD_APP_1_NAME,
-        filename: 'remoteEntryPoint.js',
+        filename: env.VITE_CHILD_APP_1_OUT_FILE_NAME,
         exposes: {
           './App': './src/views/App',
         },
         remotes: {},
-        shared: ['react', 'react-dom', 'react-router-dom'],
+        // shared: ['react', 'react-dom', 'react-router-dom'],
       }),
     ].concat((env.VITE_CHILD_APP_1_HTTPS === 'true') ? [
       basicSsl(),
@@ -33,9 +34,9 @@ export default defineConfig(({command, mode}: {
       port: Number(env.VITE_CHILD_APP_1_PORT),
 
       proxy: (mode === 'development' ? {
-        '^/assets': {
-          target: `http://localhost:${env.VITE_CHILD_APP_1_PORT}/dist`,
-          secure: false,
+        [`^/(assets|assets-${env.VITE_CHILD_APP_1_NAME})/`]: {
+          target: `${env.VITE_CHILD_APP_1_HTTPS === 'true' ? 'https' : 'http'}://localhost:${env.VITE_CHILD_APP_1_PORT}/dist`,
+          secure: (env.VITE_CHILD_APP_1_HTTPS === 'true'),
           changeOrigin: false,
           // rewrite: (path) => path.replace(/^\/assets/, '/dist/assets'),
         },
@@ -59,7 +60,11 @@ export default defineConfig(({command, mode}: {
     build: {
       rollupOptions: {
         output: {
-          assetFileNames: (assetInfo: { name: string }) => {
+          // chunkFileNames: (assetInfo: PreRenderedChunk) => {
+          //   console.log("INFO", assetInfo.name)
+          //   return `${assetInfo.name}.js`;
+          // },
+          assetFileNames: (assetInfo: PreRenderedAsset) => {
             let dir = 'assets';
             let extType = assetInfo.name.split('.')[1];
 

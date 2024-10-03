@@ -19,13 +19,12 @@ export default defineConfig(({command, mode}: {
       }),
       federation({
         name: env.VITE_CHILD_APP_2_NAME,
-        filename: 'remoteEntryPoint.js',
+        filename: env.VITE_CHILD_APP_2_OUT_FILE_NAME,
         exposes: {
           './App': './src/mountApp',
         },
         remotes: {},
-        shared: ['vue', 'vue-router', 'vuex'],
-        // shared: dependencies,
+        // shared: ['vue', 'vue-router', 'vuex'],
       }),
     ].concat((env.VITE_CHILD_APP_2_HTTPS === 'true') ? [
       basicSsl(),
@@ -37,9 +36,9 @@ export default defineConfig(({command, mode}: {
       port: Number(env.VITE_CHILD_APP_2_PORT),
 
       proxy: (mode === 'development' ? {
-        '^/assets': {
-          target: `http://localhost:${env.VITE_CHILD_APP_2_PORT}/dist`,
-          secure: false,
+        [`^/(assets|assets-${env.VITE_CHILD_APP_2_NAME})/`]: {
+          target: `${env.VITE_CHILD_APP_2_HTTPS === 'true' ? 'https' : 'http'}://localhost:${env.VITE_CHILD_APP_2_PORT}/dist`,
+          secure: (env.VITE_CHILD_APP_2_HTTPS === 'true'),
           changeOrigin: false,
           // rewrite: (path) => path.replace(/^\/assets/, '/dist/assets'),
         },
