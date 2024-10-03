@@ -94,5 +94,3 @@ COPY --from=build /home/node/front/${BUILD_FRONTEND_PATH}/dist /frontend-dist
 COPY --from=build /home/node/front/docker-deploy/nginx/_nginx-substituted.conf /etc/nginx/nginx.conf
 COPY --from=build /home/node/front/docker-deploy/nginx/locations/_http-substituted /etc/nginx/include_locations/http
 COPY --from=build /home/node/front/docker-deploy/nginx/locations/_https-substituted /etc/nginx/include_locations/https
-
-RUN nginx -t

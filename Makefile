@@ -50,12 +50,6 @@ update-all:
 	make update ENV_FILE_NAME=.env.react-child
 	make update ENV_FILE_NAME=.env.host
 
-update-all:
-	echo "[Make]: Running 'update-all' target in Makefile..." && \
-	make update ENV_FILE_NAME=.env.vue-child
-	make update ENV_FILE_NAME=.env.react-child
-	make update ENV_FILE_NAME=.env.host
-
 setup-ci:
 	echo "[Make]: Running 'setup-ci' target in Makefile..." && \
 	bash ./docker-deploy/scripts/setup-ci.sh && \

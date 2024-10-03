@@ -24,9 +24,6 @@ services:
         - API_PORT
         - ENABLE_HTTPS
         - IS_HOST_APP
-    environment:
-      - API_HOST
-      - API_PORT
     volumes:
       - ./dist:/usr/share/nginx/html:rw
       - ./certbot-${ENV_FILE_NAME}/www:/var/www/certbot/:ro
@@ -45,8 +42,8 @@ services:
     container_name: ${FRONTEND_COMPOSE_NAME:-frontend-compose}-nginx-certbot
     image: nginx:${NGINX_RELEASE}
     volumes:
-      - ./nginx/nginx_certbot.conf:/etc/nginx/nginx.conf:ro
-      - ./certbot-${ENV_FILE_NAME}/www:/var/www/certbot/:ro
+      - ./nginx/nginx_certbot.conf:/etc/nginx/nginx.conf:rw
+      - ./certbot-${ENV_FILE_NAME}/www:/var/www/certbot/:rw
     ports:
       - "80:80"
     restart: no
