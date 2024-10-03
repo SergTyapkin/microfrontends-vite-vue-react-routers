@@ -1,3 +1,5 @@
+![GithubCI](https://github.com/sergtyapkin/microfrontends-vite-vue-react-routers/actions/workflows/deploy-host.yml/badge.svg)
+
 # Microfrontend Template with Vite Module Federation, Vue, React, Vue-router, Vuex, and TypeScript
 
 This repository demonstrates a microfrontend architecture using Vite's Module Federation plugin, React, and TypeScript. The demo consists of one host application (`vue-host-app`) and two remote applications (`vue-child-app` and `react-child-app`).
@@ -6,6 +8,7 @@ This repository demonstrates a microfrontend architecture using Vite's Module Fe
 
 - [Prerequisites](#prerequisites)
 - [Project Structure](#project-structure)
+- [Deployment](#deployment)
 - [Running the Applications](#running-the-applications)
 - [Technologies Used](#technologies-used)
 
@@ -47,6 +50,19 @@ microfrontend-vite-vue-react-routers/
 ├── Makefile
 └── README.md
 ```
+
+## Deployment
+Clone this repo and run `make all`. That's all!
+
+This script:
+1. Installs `docker` if it doesn't exist yet
+2. Adds the current user to the `Docker` group to run it without `sudo`
+3. Offers to configure the `.env` file
+4. Receives Letsencrypt certificates
+5. Installs and configures `cron` to update certificates monthly
+6. Creates a pair of SSH keys, adds the public one to `~/.ssh/authorized_keys`, outputs the private one to the console, it needs to be added as a secret environment variable `SSH_DEPLOY_KEY` in the Github settings.
+7. Builds the application from the last commit to the `main` branch, launches the final docker container with it.
+8. Shows the rest of the variables that need to be set in the GitHub settings to configure CI/CD
 
 
 ## Running the applications
