@@ -44,6 +44,9 @@ export default {
     const {onParentNavigate, unmount} = vueComponentMount(this.$el, {
       initialPath: this.initialPath,
       onNavigate: (nextPathname) => {
+        if (!nextPathname) {
+          return;
+        }
         let nextFullPath = this.initialPath + nextPathname;
         if (this.$route.path.replace(/\/$/, "") !== nextFullPath.replace(/\/$/, "")) { // Compare with replacing trailing slashes
           this.skip1watch = true;

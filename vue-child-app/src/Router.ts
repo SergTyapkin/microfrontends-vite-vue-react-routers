@@ -1,4 +1,4 @@
-import {createRouter, createWebHistory, Router, RouteLocationNormalized, NavigationGuardNext} from 'vue-router'
+import {createRouter, createWebHistory, createMemoryHistory, Router, RouteLocationNormalized, NavigationGuardNext} from 'vue-router'
 
 // @ts-ignore
 import {type Store} from 'vuex'
@@ -14,7 +14,7 @@ import Left from "~/components/Left.vue";
 import Right from "~/components/Right.vue";
 
 
-export default function createVueRouter(Store: Store, initialPath: string, beforeEach: (path: string) => void): Router {
+export default function createVueRouter(Store: Store, initialPath: string, beforeEach: (path: string) => void, isItHostApp: boolean): Router {
   Store;
 
   const routes = [
@@ -30,7 +30,7 @@ export default function createVueRouter(Store: Store, initialPath: string, befor
   ];
 
   const Router = createRouter({
-    history: createWebHistory(initialPath),
+    history: isItHostApp ? createWebHistory(initialPath) : createMemoryHistory(initialPath),
     routes: routes,
   });
 
@@ -39,7 +39,7 @@ export default function createVueRouter(Store: Store, initialPath: string, befor
   Router.beforeEach(async (to: RouteLocationNormalized, from: RouteLocationNormalized, next: NavigationGuardNext) => {
     to;
     from;
-
+    console.log("VUE ROUTER", to, from)
     beforeEach(to.path);
 
     // if (!router_got_user) {

@@ -47,6 +47,9 @@ export default {
     const {onParentNavigate, unmount} = reactComponentMount(this.$el, {
       initialPath: this.initialPath,
       onNavigate: ({ pathname: nextPathname }) => {
+        if (!nextPathname) {
+          return;
+        }
         let nextFullPath = this.initialPath + nextPathname;
         if (this.$route.path !== nextFullPath) {
           this.skip1watch = true;
