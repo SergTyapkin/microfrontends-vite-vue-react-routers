@@ -1,4 +1,7 @@
 ![GithubCI](https://github.com/sergtyapkin/microfrontends-vite-vue-react-routers/actions/workflows/deploy-host.yml/badge.svg)
+![GithubCI](https://github.com/sergtyapkin/microfrontends-vite-vue-react-routers/actions/workflows/deploy-react-child.yml/badge.svg)
+![GithubCI](https://github.com/sergtyapkin/microfrontends-vite-vue-react-routers/actions/workflows/deploy-vue-child.yml/badge.svg)
+
 
 # Microfrontend Template with Vite Module Federation, Vue, React, Vue-router, Vuex, and TypeScript
 
