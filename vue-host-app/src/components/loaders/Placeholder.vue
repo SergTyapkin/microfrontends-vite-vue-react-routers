@@ -24,7 +24,7 @@
 
 <template>
   <div class="root-placeholder" :style="{'--height': height, '--width': width}">
-    <CircleLoading v-if="showLoadingSymbol" class="loading" light></CircleLoading>
+    <CircleLoading v-if="showLoadingSign" class="loading" light></CircleLoading>
   </div>
 </template>
 
@@ -42,7 +42,7 @@ export default {
       type: String,
       required: true,
     },
-    showLoadingSymbol: {
+    showLoadingSign: {
       type: Boolean,
       default: false,
     },
