@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Placeholder :width="placeholderWidth" :height="placeholderHeight" show-loading-symbol></Placeholder>
+    <Placeholder :width="placeholderWidth" :height="placeholderHeight" show-loading-symbol :error="isLoadingError"></Placeholder>
   </div>
 </template>
 
@@ -34,11 +34,18 @@ export default {
       initialPath: this.$route.matched[0].path,
 
       skip1watch: false,
+      isLoadingError: false,
     }
   },
 
   async mounted() {
-    const importedModule = await this.vueImportPromise;
+    let importedModule;
+    try {
+      importedModule = await this.vueImportPromise;
+    } catch (e) {
+      this.isLoadingError = true;
+      return;
+    }
     const vueComponentMount = importedModule.default;
 
     const {onParentNavigate, unmount} = vueComponentMount(this.$el, {

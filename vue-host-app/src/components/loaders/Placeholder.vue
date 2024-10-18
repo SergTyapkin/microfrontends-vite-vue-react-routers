@@ -12,19 +12,25 @@
   background linear-gradient(60deg, c1 0, c1 40%, c2 50%, c1 60%, c1 100%)
   background-size 400% 100%
   position relative
-  animation-not-reduced(move-background infinite 2s linear)
-  @keyframes move-background
-    from
-      background-position-x 0
-    to
-      background-position-x 125%
-  .loading
+  &:not(.error)
+    animation-not-reduced(move-background infinite 2s linear)
+    @keyframes move-background
+      from
+        background-position-x 0
+      to
+        background-position-x 125%
+  .loading-symbol
     centered-absolute-transform()
 </style>
 
 <template>
-  <div class="root-placeholder" :style="{'--height': height, '--width': width}">
-    <CircleLoading v-if="showLoadingSign" class="loading" light></CircleLoading>
+  <div class="root-placeholder" :class="{error}" :style="{'--height': height, '--width': width}">
+    <transition name="opacity">
+      <CircleLoading v-if="showLoadingSymbol && !error" class="loading-symbol" light></CircleLoading>
+    </transition>
+    <transition name="opacity">
+      <div v-if="error" class="loading-symbol">Unable to load component</div>
+    </transition>
   </div>
 </template>
 
@@ -42,7 +48,11 @@ export default {
       type: String,
       required: true,
     },
-    showLoadingSign: {
+    showLoadingSymbol: {
+      type: Boolean,
+      default: false,
+    },
+    error: {
       type: Boolean,
       default: false,
     },

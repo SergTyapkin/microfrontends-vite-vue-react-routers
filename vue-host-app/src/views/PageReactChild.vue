@@ -2,9 +2,11 @@
 </style>
 
 <template>
-  <h3><u><router-link :to="{name: 'default'}">&lt; Back</router-link></u></h3>
+  <div>
+    <h3><u><router-link :to="{name: 'default'}">&lt; Back</router-link></u></h3>
 
-  <ReactChild></ReactChild>
+    <ReactChild></ReactChild>
+  </div>
 </template>
 
 <script>

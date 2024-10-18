@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Placeholder :width="placeholderWidth" :height="placeholderHeight" show-loading-symbol></Placeholder>
+    <Placeholder :width="placeholderWidth" :height="placeholderHeight" show-loading-symbol :error="isLoadingError"></Placeholder>
   </div>
 </template>
 
@@ -36,12 +36,18 @@ export default {
 
       skip1watch: false,
 
-      isComponentLoaded: false,
+      isLoadingError: false,
     }
   },
 
   async mounted() {
-    const importedModule = await this.reactImportPromise;
+    let importedModule;
+    try {
+      importedModule = await this.reactImportPromise;
+    } catch (e) {
+      this.isLoadingError = true;
+      return;
+    }
     const reactComponentMount = importedModule.mount;
 
     const {onParentNavigate, unmount} = reactComponentMount(this.$el, {
@@ -59,8 +65,6 @@ export default {
     }, this.elementProps);
     this.navigateReactElement = onParentNavigate;
     this.unmount = unmount;
-
-    this.isComponentLoaded = true;
   },
 
   methods: {
