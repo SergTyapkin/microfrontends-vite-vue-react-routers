@@ -11,7 +11,10 @@ export default {
   components: {Placeholder},
 
   props: {
-    vueImportPromise: Promise,
+    vueImportPromise: {
+      type: Promise,
+      required: true,
+    },
     elementProps: {
       type: Object,
       default: {},
@@ -86,5 +89,9 @@ export default {
       }
     },
   },
+
+  beforeUnmount() {
+    this.unmount();
+  }
 }
 </script>

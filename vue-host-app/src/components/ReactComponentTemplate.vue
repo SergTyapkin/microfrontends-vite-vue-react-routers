@@ -5,14 +5,16 @@
 </template>
 
 <script>
-import CircleLoading from "~/components/loaders/CircleLoading.vue";
 import Placeholder from "~/components/loaders/Placeholder.vue";
 
 export default {
-  components: {Placeholder, CircleLoading},
+  components: {Placeholder},
 
   props: {
-    reactImportPromise: Promise,
+    reactImportPromise: {
+      type: Promise,
+      required: true,
+    },
     elementProps: {
       type: Object,
       default: {},
