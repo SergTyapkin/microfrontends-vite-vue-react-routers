@@ -1,22 +1,23 @@
-@require "../styles/constantsReact.styl"
-@require "../../../shared-res/styles/components.styl"
-@require "../../../shared-res/styles/animations.styl"
+@import "../styles/constantsReact.styl"
+@import "../../../shared-res/styles/components.styl"
+@import "../../../shared-res/styles/animations.styl"
 
 .root-react-app
   block(colorReact)
 
 .logo
-  size = 200px
-  height size
-  width size
   will-change filter
-  transition filter 300ms
+  size = 200px
   display block
+  width size
+  height size
   margin 0 auto
+  transition filter 300ms
   &:hover
-   filter 'drop-shadow(0 0 %s %s)' % ((size / 20) colorReact)
+    filter 'drop-shadow(0 0 %s %s)' % ((size / 20) colorReact)
 
   animation-not-reduced(logo-spin infinite 10s ease alternate)
+
   @keyframes logo-spin
     from
       transform rotate(0deg) scale(0.8)

@@ -1,25 +1,25 @@
 <style lang="stylus" scoped>
 header-height = 80px
 header
-  padding 0 40px
-  line-height header-height
-  height header-height
   position absolute
   top 0
   width 100%
-  background black
+  height header-height
+  padding 0 40px
+  line-height header-height
   text-align center
+  background black
 
 .all-page-wrapper
   width 100%
   min-height 100vh
 
   > *
-    padding 40px
-    padding-top (header-height + 40px)
     position absolute
     width 100%
     min-height 100vh
+    padding 40px
+    padding-top (header-height + 40px)
 </style>
 
 
@@ -34,6 +34,7 @@ header
     opacity: 0;
   }
 }
+
 @keyframes scale-in {
   0% {
     transform: scale(1.05);
@@ -50,19 +51,20 @@ header
 }
 .scale-in-enter-active {
   overflow: hidden;
-  animation: scale-in .2s ease;
+  animation: scale-in 0.2s ease;
 }
 .scale-in-leave-active {
   overflow: hidden;
-  animation: scale-out .2s ease;
+  animation: scale-out 0.2s ease;
 }
 
 .opacity-enter-active {
-  animation: opacity .3s;
+  animation: opacity 0.3s;
 }
 .opacity-leave-active {
-  animation: opacity .3s reverse forwards;
+  animation: opacity 0.3s reverse forwards;
 }
+
 @keyframes opacity {
   0% {
     opacity: 0;
@@ -77,15 +79,15 @@ header
   <header><h1>Host app header</h1></header>
 
   <div class="all-page-wrapper">
-    <router-view v-slot="{ Component }">
+    <router-view #default="{ Component }">
       <transition name="scale-in">
-        <component :is="Component"/>
+        <component :is="Component" />
       </transition>
     </router-view>
   </div>
 
-  <Modals ref="modal"></Modals>
-  <Popups ref="popups"></Popups>
+  <Modals ref="modal" />
+  <Popups ref="popups" />
 </template>
 
 

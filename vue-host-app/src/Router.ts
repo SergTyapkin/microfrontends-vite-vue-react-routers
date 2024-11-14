@@ -10,12 +10,10 @@ import PageVueChild from "~/views/PageVueChild.vue";
 import PageReactChild from "~/views/PageReactChild.vue";
 
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export default function createVueRouter(Store: Store): Router {
-  Store;
-
   const routes = [
     {path: '/', name: 'default', component: PageNavigation},
-
     {path: '/all', name: 'all', component: PageAllComponents},
     {path: '/vue-child', name: 'vueChild', component: PageVueChild, children: [{path: ':pathMatch(.*)*', component: PageVueChild}]},
     {path: '/react-child', name: 'reactChild', component: PageReactChild, children: [{path: ':pathMatch(.*)*', component: PageReactChild}]},
@@ -30,9 +28,8 @@ export default function createVueRouter(Store: Store): Router {
 
 
   // let router_got_user = false;
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   Router.beforeEach(async (to: RouteLocationNormalized, from: RouteLocationNormalized, next: NavigationGuardNext) => {
-    to;
-    from;
     // if (!router_got_user) {
     //   await Store.dispatch('GET_USER');
     //   router_got_user = true;

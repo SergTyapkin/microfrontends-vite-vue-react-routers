@@ -6,8 +6,8 @@
     <h3><u><router-link :to="{name: 'default'}">&lt; Back</router-link></u></h3>
     <div class="title">All child components:</div>
 
-    <ReactChild></ReactChild>
-    <VueChild></VueChild>
+    <ReactChild />
+    <VueChild />
   </div>
 </template>
 

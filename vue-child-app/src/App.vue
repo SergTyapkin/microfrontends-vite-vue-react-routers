@@ -6,20 +6,20 @@
 .root-app
   block(colorVue)
   .logo
+    will-change filter
     size = 100px
-    moving-down-size = size / 3
-
+    display block
     width size
     height size
-    will-change filter
-    transition filter 300ms
-    display block
     margin 0 auto
     margin-bottom moving-down-size
+    transition filter 300ms
+    moving-down-size = size / 3
     &:hover
       filter 'drop-shadow(0 0 %s %s)' % ((size / 10) colorVue)
 
     animation-not-reduced(logo-move infinite 2s ease alternate)
+
     @keyframes logo-move
       from
         transform translateY(moving-down-size) scale(0.8)

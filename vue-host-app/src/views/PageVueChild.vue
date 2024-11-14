@@ -8,7 +8,7 @@
     <h3><u><router-link to="/vue-child/main/left">Child To left</router-link></u></h3>
     <h3><u><router-link to="/vue-child/main/right">Child To Right</router-link></u></h3>
 
-    <VueChild></VueChild>
+    <VueChild />
   </div>
 </template>
 

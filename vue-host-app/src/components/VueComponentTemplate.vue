@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Placeholder :width="placeholderWidth" :height="placeholderHeight" show-loading-symbol :error="isLoadingError"></Placeholder>
+    <Placeholder :width="placeholderWidth" :height="placeholderHeight" show-loading-symbol :error="isLoadingError" />
   </div>
 </template>
 
@@ -17,7 +17,7 @@ export default {
     },
     elementProps: {
       type: Object,
-      default: {},
+      default: () => ({}),
     },
     placeholderHeight: {
       type: String,
@@ -45,7 +45,7 @@ export default {
     let importedModule;
     try {
       importedModule = await this.vueImportPromise;
-    } catch (e) {
+    } catch {
       this.isLoadingError = true;
       return;
     }
@@ -71,6 +71,10 @@ export default {
     this.unmount();
   },
 
+  beforeUnmount() {
+    this.unmount();
+  },
+
   methods: {
     getInnerRoute(path) {
       return path.split(this.initialPath)[1];
@@ -78,7 +82,7 @@ export default {
   },
 
   watch: {
-    $route(to, from) {
+    $route(to) {
       if (this.skip1watch) {
         this.skip1watch = false;
         return;
@@ -88,10 +92,6 @@ export default {
         this.navigateVueElement(innerRoute);
       }
     },
-  },
-
-  beforeUnmount() {
-    this.unmount();
   }
 }
 </script>
