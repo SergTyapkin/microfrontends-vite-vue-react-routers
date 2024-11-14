@@ -1,7 +1,7 @@
 <style lang="stylus" scoped>
-@require "./styles/constantsVue.styl"
-@require "../../shared-res/styles/components.styl"
-@require "../../shared-res/styles/animations.styl"
+@import "./styles/constantsVue.styl"
+@import "../../shared-res/styles/components.styl"
+@import "../../shared-res/styles/animations.styl"
 
 .root-app
   block(colorVue)

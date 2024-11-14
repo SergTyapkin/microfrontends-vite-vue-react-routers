@@ -1,6 +1,6 @@
-import App from "../App.vue";
-import API from "../Api.js";
-import {ComponentCustomProperties, VueElement} from "vue";
+import App from "~/App.vue";
+import API from "~/Api";
+import {VueElement} from "vue";
 
 declare module 'vue' {
   interface ComponentCustomProperties {
@@ -10,12 +10,3 @@ declare module 'vue' {
     $popups: VueElement,
   }
 }
-
-declare module '*.vue' {
-  import type { DefineComponent } from 'vue'
-  const component: DefineComponent<{}, {}, any>
-  export default component
-}
-
-interface App extends ComponentCustomProperties {}
-

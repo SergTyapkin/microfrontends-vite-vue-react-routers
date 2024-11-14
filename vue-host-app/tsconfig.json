@@ -1,31 +1,35 @@
 {
   "compilerOptions": {
+    /* Modules */
     "target": "esnext",
-    "useDefineForClassFields": true,
-    "lib": ["esnext", "DOM", "DOM.Iterable"],
     "module": "esnext",
+    "moduleResolution": "node",
+    "lib": ["esnext", "DOM", "DOM.Iterable"],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-
+    "baseUrl": "./",
+    "paths": {
+      "~/*": ["./src/*"],
+      "#/*": ["./static/*"],
+      "@node_modules/*": ["./node_modules/*"]
+    },
     /* Bundler mode */
     "forceConsistentCasingInFileNames": true,
-    "moduleResolution": "nodenext",
     "resolveJsonModule": true,
     "isolatedModules": true,
+    "sourceMap": true,
     "noEmit": true,
-
     /* Linting */
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
+    "useDefineForClassFields": true,
     "noFallthroughCasesInSwitch": true,
-
-    "paths": {
-      "~/*": ["/src/*"],
-      "@~/*": ["/node_modules/*"],
-    }
+    "typeRoots": ["./node_modules"],
+    "types": ["vue", "vuex/types"]
   },
-  "include": ["src"],
+  "include": ["src", "tests"],
+  "exclude": ["node_modules", "vite.config.{js,ts,mjs,mts}"]
 }

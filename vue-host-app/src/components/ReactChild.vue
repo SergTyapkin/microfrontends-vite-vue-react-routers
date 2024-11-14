@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import ReactComponentTemplate from "./ReactComponentTemplate.vue";
+import ReactComponentTemplate from "~/ReactComponentTemplate.vue";
 
 export default {
   components: {ReactComponentTemplate},

@@ -1,4 +1,4 @@
-import mount from "./mountApp.js";
+import mount from "~/mountApp";
 
 import '../../shared-res/styles/global.styl';
 

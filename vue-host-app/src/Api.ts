@@ -2,7 +2,6 @@ import REST_API from '@sergtyapkin/rest-api';
 
 type Request = (url: string, data?: any) => Promise<{ data: any, status: number, ok: boolean}>
 
-// @ts-ignore
 export default class API extends REST_API {
   declare get: Request;
   declare post: Request;

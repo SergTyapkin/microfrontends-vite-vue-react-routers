@@ -1,18 +1,12 @@
 import {createRouter, createWebHistory, Router, RouteLocationNormalized, NavigationGuardNext} from 'vue-router'
 
-// @ts-ignore
-import {type Store} from 'vuex'
+import { type Store } from '~/types/store';
 
 // Components:
-// @ts-ignore
 import Page404 from "~/views/Page404.vue";
-// @ts-ignore
 import PageNavigation from "~/views/PageNavigation.vue";
-// @ts-ignore
 import PageAllComponents from "~/views/PageAllComponents.vue";
-// @ts-ignore
 import PageVueChild from "~/views/PageVueChild.vue";
-// @ts-ignore
 import PageReactChild from "~/views/PageReactChild.vue";
 
 

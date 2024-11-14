@@ -1,7 +1,6 @@
-import './App.styl'
-import getExportMountFunction from "../exportUtils.js";
-// @ts-ignore
-import ImgReactLogo from '/res/react.svg';
+import getExportMountFunction from "~/exportUtils.js";
+import '~/views/App.styl'
+import ImgReactLogo from '#/react.svg';
 
 const App = ({caption = "default text"}) => (
   <div className="root-react-app">

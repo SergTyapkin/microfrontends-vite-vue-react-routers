@@ -1,12 +1,11 @@
 import { createApp } from 'vue'
 
-// @ts-ignore
-import App from './App.vue';
-import Storage from './Store.js';
-import createVueRouter from './Router.js';
+import App from '~/App.vue';
+import Storage from '~/Store';
+import createVueRouter from '~/Router';
 
 // глобальное подключение css файла с базовыми стилями
-// import './styles/fontsLoader.styl';
+import '../../shared-res/styles/fontsLoader.styl';
 import '../../shared-res/styles/global.styl';
 // Вообще обычно делать import не JS-ных файлов в js нельзя, но Vite это распознает так, как нужно.
 

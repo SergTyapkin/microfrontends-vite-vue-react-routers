@@ -1,0 +1,16 @@
+{
+  "plugin": ["typedoc-plugin-vue", "@mxssfd/typedoc-theme"],
+  "exclude": ["docs/", "dist/"],
+  "readme": "./README.md",
+  "gitRevision": "main",
+  "entryPoints": ["./src"],
+  "name": "Template microfrontends host app project Typescript Docs",
+  "$schema": "https://typedoc.org/schema.json",
+  "emit": "docs",
+  "sort": ["static-first", "kind", "enum-value-ascending"],
+  "includeVersion": true,
+  "markdownItOptions": {
+    "html": true
+  },
+  "highlightLanguages": ["typescript", "tsx", "css", "json", "jsonc", "python", "yaml", "shell"]
+}

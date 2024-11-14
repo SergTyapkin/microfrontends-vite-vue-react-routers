@@ -1,7 +1,7 @@
 <style lang="stylus" scoped>
-@require "../../../../shared-res/styles/animations.styl"
-@require "../../../../shared-res/styles/utils.styl"
-@require "../../../../shared-res/styles/constants.styl"
+@import "../../../../shared-res/styles/animations.styl"
+@import "../../../../shared-res/styles/utils.styl"
+@import "../../../../shared-res/styles/constants.styl"
 
 .root-placeholder
   height var(--height)

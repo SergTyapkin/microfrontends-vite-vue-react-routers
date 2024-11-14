@@ -1,16 +1,11 @@
 import {createRouter, createWebHistory, createMemoryHistory, Router, RouteLocationNormalized, NavigationGuardNext} from 'vue-router'
 
-// @ts-ignore
-import {type Store} from 'vuex'
+import {type Store} from '~/types/store'
 
 // Components:
-// @ts-ignore
 import Page404 from "~/views/Page404.vue";
-// @ts-ignore
 import PageMain from "~/views/PageMain.vue";
-// @ts-ignore
 import Left from "~/components/Left.vue";
-// @ts-ignore
 import Right from "~/components/Right.vue";
 
 

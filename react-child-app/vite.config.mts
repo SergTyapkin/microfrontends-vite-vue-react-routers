@@ -1,12 +1,12 @@
 import {defineConfig, loadEnv} from 'vite';
-import react from '@vitejs/plugin-react';
-import basicSsl from '@vitejs/plugin-basic-ssl';
-import federation from '@originjs/vite-plugin-federation';
+import pluginReact from '@vitejs/plugin-react';
+import pluginBasicSsl from '@vitejs/plugin-basic-ssl';
+import pluginFederation from '@originjs/vite-plugin-federation';
 import * as path from 'path';
-import {PreRenderedAsset, PreRenderedChunk} from "rollup";
+import {PreRenderedAsset} from "rollup";
 
 
-export default defineConfig(({command, mode}: {
+export default defineConfig(({mode}: {
   command: 'build' | 'serve',
   mode: 'development' | 'production' | string,
 }) => {
@@ -15,8 +15,8 @@ export default defineConfig(({command, mode}: {
 
   return {
     plugins: [
-      react(),
-      federation({
+      pluginReact(),
+      pluginFederation({
         name: env.VITE_CHILD_APP_1_NAME,
         filename: env.VITE_CHILD_APP_1_OUT_FILE_NAME,
         exposes: {
@@ -26,7 +26,7 @@ export default defineConfig(({command, mode}: {
         // shared: ['react', 'react-dom', 'react-router-dom'],
       }),
     ].concat((env.VITE_CHILD_APP_1_HTTPS === 'true') ? [
-      basicSsl(),
+      pluginBasicSsl(),
     ] : []),
 
     server: {
@@ -46,14 +46,18 @@ export default defineConfig(({command, mode}: {
     resolve: {
       alias: [
         {
-          find: '~', // to use ~ as project root like: 'import Some from '~/components/Some.vue''
-          replacement: path.resolve(__dirname, 'src')
+          find: '~', // to use ~ as project root like: "import Some from '~/components/Some.vue'"
+          replacement: path.resolve(__dirname, 'src'),
         },
         {
-          find: '@~', // to use @~ as node_modules root like: 'import Some from '@~/Some''
-          replacement: path.resolve(__dirname, 'node_modules')
-        }
-      ]
+          find: '#', // to use # as static root like: "import SomeResource from '#/icons/SomeResource.png'"
+          replacement: path.resolve(__dirname, 'static'),
+        },
+        {
+          find: '@node_modules', // to use @node_modules as node_modules root like: "import Some from '@node_modules/Some'"
+          replacement: path.resolve(__dirname, 'node_modules'),
+        },
+      ],
     },
 
     publicDir: path.resolve(__dirname, '..', 'shared-res', 'shared-public'),

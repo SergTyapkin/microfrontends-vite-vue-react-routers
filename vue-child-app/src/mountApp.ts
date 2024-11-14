@@ -1,21 +1,28 @@
-import { createApp } from 'vue'
-import { type Router } from 'vue-router'
+import {createApp} from 'vue'
+import {type Router} from 'vue-router'
+import {type Store} from '~/types/store'
 
-// @ts-ignore
-import App from './App.vue'
-import createVueRouter from './Router.js'
+import App from '~/App.vue'
+import createVueRouter from '~/Router'
+import Vuex from "vuex";
 
-export default function mount(el: HTMLElement, options?: {
-  onNavigate: (pathname: string) => void,
-  initialPath: string
-}, props: any = {}) {
+export default function mount(
+  el: HTMLElement,
+  options?: {
+    onNavigate: (pathname: string) => void,
+    initialPath: string
+  },
+  props: { store: Store } = { store: new Vuex.Store() },
+) {
   let Router: Router;
   if (!options) {
-    Router = createVueRouter(Storage, '', () => {}, true);
+    Router = createVueRouter(props.store, '', () => {
+    }, true);
   } else {
-    const onNavigate = options.onNavigate ?? (() => {});
+    const onNavigate = options.onNavigate ?? (() => {
+    });
     const initialPath = options.initialPath ?? '';
-    Router = createVueRouter(Storage, initialPath, onNavigate, false);
+    Router = createVueRouter(props.store, initialPath, onNavigate, false);
   }
   const app = createApp(App, props);
   app
